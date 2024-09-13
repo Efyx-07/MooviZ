@@ -1,0 +1,14 @@
+@import '../../styles/mixins';
+@import '../../styles/vars';
+
+header {
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: $light-border;
+
+  .content {
+    @include content-style;
+  }
+}

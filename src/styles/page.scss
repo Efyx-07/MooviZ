@@ -1,0 +1,11 @@
+@import './mixins';
+
+.page {
+  min-height: calc(100dvh - 8rem);
+  display: flex;
+  justify-content: center;
+
+  .content {
+    @include content-style;
+  }
+}

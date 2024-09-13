@@ -1,0 +1,9 @@
+@import '../../styles/vars';
+
+footer {
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: $light-border;
+}
