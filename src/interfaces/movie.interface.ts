@@ -4,6 +4,7 @@ export interface Movie {
   imdbID: string;
   Type: string;
   Poster: string;
+  Genre?: string;
 }
 
 export interface MoviesSearchResponse {

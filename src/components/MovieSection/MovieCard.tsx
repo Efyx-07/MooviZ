@@ -1,17 +1,22 @@
 import './MovieCard.scss';
 import Image from 'next/image';
 import { Movie } from '@/interfaces/movie.interface';
+import { useRouter } from 'next/navigation';
 
 interface MovieCardProps {
   movies: Movie[];
 }
 
 export default function MovieCard({ movies }: MovieCardProps) {
+  const router = useRouter();
   return (
     <>
       {movies.map((movie) => (
         <div className="movie-card" key={movie.imdbID}>
-          <div className="poster-container">
+          <div
+            className="poster-container"
+            onClick={() => router.push(`/movie/${movie.imdbID}`)}
+          >
             {/* Certaines affiches peuvent être manquantes ('N/A'), necessite un affichage conditionnel */}
             {movie.Poster !== 'N/A' ? (
               <Image
