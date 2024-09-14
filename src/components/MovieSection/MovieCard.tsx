@@ -1,29 +1,37 @@
 import './MovieCard.scss';
 import Image from 'next/image';
+import { Movie } from '@/interfaces/movie.interface';
 
 interface MovieCardProps {
-  title: string;
-  poster: string;
-  year: string;
+  movies: Movie[];
 }
 
-export default function MovieCard() {
+export default function MovieCard({ movies }: MovieCardProps) {
   return (
-    <div className="movie-card">
-      <div className="image-container">
-        <Image
-          className="img"
-          src="https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg"
-          width={400}
-          height={500}
-          alt=""
-          priority
-        />
-      </div>
-      <div className="infos-container">
-        <p className="movie-title">Inception</p>
-        <p className="movie-year">2010</p>
-      </div>
-    </div>
+    <>
+      {movies.map((movie) => (
+        <div className="movie-card" key={movie.imdbID}>
+          <div className="poster-container">
+            {/* Certaines affiches peuvent être manquantes ('N/A'), necessite un affichage conditionnel */}
+            {movie.Poster !== 'N/A' ? (
+              <Image
+                className="poster"
+                src={movie.Poster}
+                width={400}
+                height={500}
+                alt={movie.Title}
+                priority
+              />
+            ) : (
+              <p>No image found</p>
+            )}
+          </div>
+          <div className="infos-container">
+            <p className="movie-title">{movie.Title}</p>
+            <p className="movie-year">{movie.Year}</p>
+          </div>
+        </div>
+      ))}
+    </>
   );
 }
