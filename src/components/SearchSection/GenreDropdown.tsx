@@ -29,10 +29,11 @@ export default function GenreDropdown() {
     if (movieIds.length > 0) FetchGenres(movieIds);
   }, [movieIds]);
 
+  // Procède au filtrage selon le genre sélectionné
   const handleGenreChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const genre = event.target.value;
     setSelectedGenre(genre);
-    movieStore.sortByGenre(genre);
+    movieStore.filterByGenre(genre);
   };
 
   return (
