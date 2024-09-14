@@ -4,7 +4,7 @@ export default function Header() {
   return (
     <header>
       <div className="content">
-        <h1>Mooviz</h1>
+        <h1>MooviZ</h1>
       </div>
     </header>
   );

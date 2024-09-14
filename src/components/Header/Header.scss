@@ -10,5 +10,9 @@ header {
 
   .content {
     @include content-style;
+
+    h1 {
+      color: orangered;
+    }
   }
 }

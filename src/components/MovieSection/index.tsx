@@ -1,4 +1,5 @@
 import '../../styles/section.scss';
+import './MovieSection.scss';
 import MovieCard from './MovieCard';
 
 export default function MovieSection() {

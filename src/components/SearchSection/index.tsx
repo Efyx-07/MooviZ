@@ -11,7 +11,11 @@ export default function SearchSection() {
         <input type="text" placeholder="Année de sortie" />
         <input type="text" placeholder="Popularité" />
       </div>
-      <Button name="Recherche" backgroundColor="orange" color="white"></Button>
+      <Button
+        name="Recherche"
+        backgroundColor="orangered"
+        color="white"
+      ></Button>
     </section>
   );
 }
