@@ -9,7 +9,7 @@ export default function KeywordSearchBar() {
   const movieStore = useMovieStore();
 
   // Procéde à la recherche par mot-clé
-  const handleSearchByKeyword = async () => {
+  const handleSearchByKeyword = async (): Promise<void> => {
     try {
       const response = await FetchMovieByKeyword(keyword);
       if (response) {
