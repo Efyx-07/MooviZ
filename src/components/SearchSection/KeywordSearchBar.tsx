@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Movie } from '@/interfaces/movie.interface';
-import { FetchMovieByKeyword } from '@/services/movie.service';
+import { FetchMovieByKeywordWithGenres } from '@/services/movie.service';
 import useMovieStore from '@/stores/MovieStore';
 import Button from '../Shared/Button';
 
@@ -11,7 +11,7 @@ export default function KeywordSearchBar() {
   // Procéde à la recherche par mot-clé
   const handleSearchByKeyword = async (): Promise<void> => {
     try {
-      const response = await FetchMovieByKeyword(keyword);
+      const response = await FetchMovieByKeywordWithGenres(keyword);
       if (response) {
         // Met à jour la liste des films dans le store
         movieStore.setMoviesData(response);

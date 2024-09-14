@@ -8,7 +8,7 @@ export default function GenreDropdown() {
   const movieStore = useMovieStore();
 
   // Récupère les films stockés dans le store
-  const movies = movieStore.movies;
+  const movies = movieStore.initialMovies;
 
   // Extrait les ids des films
   const movieIds = movies.map((movie) => movie.imdbID);
@@ -27,8 +27,9 @@ export default function GenreDropdown() {
   }, [movieIds]);
 
   const handleGenreChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedGenre(event.target.value)
-    movieStore.sortByGenre(selectedGenre);
+    const genre = event.target.value;
+    setSelectedGenre(genre)
+    movieStore.sortByGenre(genre);
   }
 
   return (

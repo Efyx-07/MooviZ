@@ -63,3 +63,35 @@ export async function getAllDisplayedFilmsGenres(
   });
   return Array.from(genreSet);
 }
+
+// Recherche du film par mot-clé dans le titre, enrichit le film avec ses genres
+// Retourne une liste de film avec format API réduit (API Search)
+// ===========================================================================================
+export async function FetchMovieByKeywordWithGenres(keyword: string): Promise<Movie[]> {
+  const url = `${OmdbBaseUrl}&s=${keyword}`;
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error('Error while fetching movies');
+    }
+    const data: MoviesSearchResponse = await response.json();
+
+    // Si retourne des résultats, enrichit chaque film avec ses genres
+    if (data.Search) {
+      const enrichedMoviesPromises = data.Search.map(async (movie) => {
+        const movieDetails = await FetchMovieDetailsById(movie.imdbID);
+        // Retourne le film enrichi avec ses détails (incluant genres)
+        return { ...movie, Genre: movieDetails.Genre };
+      });
+
+      // Attendre que toutes les promesses soient résolues
+      const enrichedMovies = await Promise.all(enrichedMoviesPromises);
+      return enrichedMovies;
+    }
+
+    return [];
+  } catch (error) {
+    throw new Error('Error while fetching movies: ' + error);
+  }
+}

@@ -9,7 +9,7 @@ import MovieCard from './MovieCard';
 export default function MovieSection() {
   // Récupère la liste de film stockée dans le store
   const movieStore = useMovieStore();
-  const movies: Movie[] = movieStore.movies;
+  const movies: Movie[] = movieStore.filteredMovies;
 
   return (
     <section className="movie-section">
