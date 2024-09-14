@@ -67,7 +67,9 @@ export async function getAllDisplayedFilmsGenres(
 // Recherche du film par mot-clé dans le titre, enrichit le film avec ses genres
 // Retourne une liste de film avec format API réduit (API Search)
 // ===========================================================================================
-export async function FetchMovieByKeywordWithGenres(keyword: string): Promise<Movie[]> {
+export async function FetchMovieByKeywordWithGenres(
+  keyword: string,
+): Promise<Movie[]> {
   const url = `${OmdbBaseUrl}&s=${keyword}`;
 
   try {

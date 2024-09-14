@@ -13,7 +13,8 @@ const useMovieStore = create<State>((set, get) => ({
   filteredMovies: [], // Tableau pour la liste de films filtrés
 
   // Fonction pour définir les données des films
-  setMoviesData: (movies: Movie[]) => set({ initialMovies: movies, filteredMovies: movies}),
+  setMoviesData: (movies: Movie[]) =>
+    set({ initialMovies: movies, filteredMovies: movies }),
 
   // Trie les films par genre et met à jour le tableau movies avec les films triés
   sortByGenre: (selectedGenre: Movie['Genre']) => {
@@ -22,8 +23,8 @@ const useMovieStore = create<State>((set, get) => ({
       set({ filteredMovies: get().initialMovies });
     } else {
       if (selectedGenre) {
-        const filteredMovies = get().initialMovies.filter(movie =>
-          movie.Genre && movie.Genre.includes(selectedGenre)
+        const filteredMovies = get().initialMovies.filter(
+          (movie) => movie.Genre && movie.Genre.includes(selectedGenre),
         );
         set({ filteredMovies });
       }

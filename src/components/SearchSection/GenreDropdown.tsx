@@ -4,7 +4,7 @@ import { getAllDisplayedFilmsGenres } from '@/services/movie.service';
 
 export default function GenreDropdown() {
   const [genres, setGenres] = useState<string[]>([]);
-  const [selectedGenre, setSelectedGenre] = useState<string>('')
+  const [selectedGenre, setSelectedGenre] = useState<string>('');
   const movieStore = useMovieStore();
 
   // Récupère les films stockés dans le store
@@ -28,9 +28,9 @@ export default function GenreDropdown() {
 
   const handleGenreChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const genre = event.target.value;
-    setSelectedGenre(genre)
+    setSelectedGenre(genre);
     movieStore.sortByGenre(genre);
-  }
+  };
 
   return (
     <>
@@ -41,7 +41,9 @@ export default function GenreDropdown() {
       >
         <option value="">-- Select a genre</option>
         {genres.map((genre) => (
-            <option key={genre} value={genre}>{genre}</option>
+          <option key={genre} value={genre}>
+            {genre}
+          </option>
         ))}
       </select>
     </>
