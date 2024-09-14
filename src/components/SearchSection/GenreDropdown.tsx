@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Movie } from '@/interfaces/movie.interface';
 import useMovieStore from '@/stores/MovieStore';
 import { getAllDisplayedFilmsGenres } from '@/services/movie.service';
 
@@ -8,22 +9,24 @@ export default function GenreDropdown() {
   const movieStore = useMovieStore();
 
   // Récupère les films stockés dans le store
-  const movies = movieStore.initialMovies;
+  const movies: Movie[] = movieStore.initialMovies;
 
-  // Extrait les ids des films
-  const movieIds = movies.map((movie) => movie.imdbID);
+  // Extrait les ids des films pour récupérer les genres
+  const movieIds: string[] = movies.map((movie) => movie.imdbID);
 
-  useEffect(() => {
-    async function FetchGenres() {
-      try {
-        const availableGenres = await getAllDisplayedFilmsGenres(movieIds);
-        setGenres(availableGenres);
-      } catch (error) {
-        throw new Error('Error while fetching genres: ' + error);
-      }
+  // Récupère les genres disponibles et les stocke dans le state
+  async function FetchGenres(ids: string[]) {
+    try {
+      const availableGenres = await getAllDisplayedFilmsGenres(ids);
+      setGenres(availableGenres);
+    } catch (error) {
+      throw new Error('Error while fetching genres: ' + error);
     }
-    // N'appelle le service que si des films sont disponibles
-    if (movieIds.length > 0) FetchGenres();
+  }
+
+  // Surveille les changements de movieIds et déclenche FetchGenres si des films son disponibles
+  useEffect(() => {
+    if (movieIds.length > 0) FetchGenres(movieIds);
   }, [movieIds]);
 
   const handleGenreChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
