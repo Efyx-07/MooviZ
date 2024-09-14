@@ -1,0 +1,8 @@
+@import './vars';
+
+section {
+  border: $light-border;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 2rem;
+}
