@@ -22,7 +22,7 @@ export default function GenreDropdown() {
         throw new Error('Error while fetching genres: ' + error);
       }
     }
-    // N'appelle le service que des films sont disponibles
+    // N'appelle le service que si des films sont disponibles
     if (movieIds.length > 0) FetchGenres();
   }, [movieIds]);
 
