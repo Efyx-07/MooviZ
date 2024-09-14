@@ -7,7 +7,7 @@ export default function ReleaseYearDropdown() {
   const movieStore = useMovieStore();
 
   // Récupère les films filtrés stockés dans le store
-  const movies: Movie[] = movieStore.filteredMovies;
+  const movies: Movie[] = movieStore.initialMovies;
 
   // Récupère leurs dates de sorties, crée un set pour éviter les doublons
   const years: string[] = Array.from(
