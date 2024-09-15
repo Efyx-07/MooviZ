@@ -1,4 +1,3 @@
-import { Movie } from '@/interfaces/movie.interface';
 import useMovieStore from '@/stores/MovieStore';
 import { useState } from 'react';
 
