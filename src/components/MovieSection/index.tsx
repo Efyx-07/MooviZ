@@ -6,6 +6,7 @@ import useMovieStore from '@/stores/MovieStore';
 import { Movie } from '@/interfaces/movie.interface';
 import MovieCard from './MovieCard';
 import RankingDropdown from './RankingDropdown';
+import PosterView from './PosterView';
 import GraphView from './GraphView';
 import { useState } from 'react';
 import { Icon } from '@iconify/react';
@@ -44,9 +45,7 @@ export default function MovieSection() {
           </div>
           <RankingDropdown />
           {isPosterView ? (
-            <div className="movie-cards-container">
-              <MovieCard movies={movies} />
-            </div>
+            <PosterView movies={movies} />
           ) : (
             <GraphView />
           )}
