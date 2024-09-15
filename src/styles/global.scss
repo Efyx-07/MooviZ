@@ -18,6 +18,33 @@ body {
   margin: 0 auto;
   background: $black;
   color: $white;
+
+  scrollbar-color: $accent;
+  scrollbar-width: 12px;
+}
+
+body::-webkit-scrollbar {
+  width: 0.75rem;
+}
+
+body::-webkit-scrollbar-track {
+  background: $black;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: $accent; /* color of the scroll thumb */
+  border-radius: 10px; /* roundness of the scroll thumb */
+  border: 3px solid $black; /* creates padding around scroll thumb */
+}
+
+body::-moz-scrollbar-track {
+  background: $black;
+}
+
+body::-moz-scrollbar-thumb {
+  background: $accent;
+  border-radius: 100%;
+  border: 3px solid $black;
 }
 
 p,
