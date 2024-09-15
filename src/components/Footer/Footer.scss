@@ -1,9 +1,15 @@
 @import '../../styles/vars';
+@import '../../styles/colors';
 
 footer {
-  height: 4rem;
+  height: 8rem;
   display: flex;
   align-items: center;
   justify-content: center;
   border-top: $light-border;
+
+  .copyright {
+    font-size: .9rem;
+    font-weight: 200;
+  }
 }

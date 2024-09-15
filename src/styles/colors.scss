@@ -2,3 +2,10 @@ $black: #121b22;
 $blackRelief: #1a2932;
 $white: #ffffff;
 $accent: rgb(255, 69, 0);
+$customLinearGradient: linear-gradient(
+    180deg,
+    $black,
+    rgba(141, 38, 0, 0.6) 71.78%,
+    rgba(255, 69, 0, 0.6) 108.97%
+  ),
+  $black;

@@ -1,7 +1,7 @@
 @import './mixins';
 
 .page {
-  min-height: calc(100dvh - 8rem);
+  min-height: calc(100dvh - 12rem); // - taille header + footer
   display: flex;
   justify-content: center;
 
