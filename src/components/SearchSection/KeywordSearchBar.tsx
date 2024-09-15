@@ -16,6 +16,7 @@ export default function KeywordSearchBar() {
       if (response) {
         // Met à jour la liste des films dans le store
         movieStore.setMoviesData(response);
+        movieStore.addMoviesToAllSearched(response);
       }
     } catch (error) {
       console.error('Error fetching movies', error);

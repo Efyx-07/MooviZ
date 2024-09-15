@@ -3,7 +3,7 @@ import useMovieStore from '@/stores/MovieStore';
 import { useState } from 'react';
 import { Icon } from '@iconify/react';
 
-export default function NoteTESTImdbDropdown() {
+export default function NoteImdbDropdown() {
   const [selectedNoteRange, setSelectedNoteRange] = useState<string>('');
   const movieStore = useMovieStore();
 
@@ -26,6 +26,9 @@ export default function NoteTESTImdbDropdown() {
     if (selectedRange) {
       const [min, max] = selectedRange.split('-').map(Number);
       movieStore.filterByImdbRatingRange(min, max);
+    } else {
+      // Réinitialise les films si aucune plage n'est sélectionnée
+      movieStore.filterByImdbRatingRange();
     }
   };
 
@@ -37,7 +40,7 @@ export default function NoteTESTImdbDropdown() {
         value={selectedNoteRange}
         onChange={handleNoteRangeChange}
       >
-        <option value="">-- Sélectionnez une plage de notes --</option>
+        <option value="">-- Sélectionnez une plage de notes</option>
         {ratingRanges.map((range) => (
           <option key={range.label} value={`${range.min}-${range.max}`}>
             {range.label}
