@@ -1,5 +1,33 @@
+@import '../../styles/colors.scss';
+
+.movie-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
 .movie-cards-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
+}
+
+.viewMode-options {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+
+  p {
+    font-size: .9rem;
+  }
+
+  .view-mode-icon {
+    font-size: 1.25rem;
+    cursor: pointer;
+
+    &:hover, &.active {
+      color: $accent;
+    }
+  }
 }
