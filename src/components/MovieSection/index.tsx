@@ -6,6 +6,7 @@ import useMovieStore from '@/stores/MovieStore';
 import { Movie } from '@/interfaces/movie.interface';
 import MovieCard from './MovieCard';
 import RankingDropdown from './RankingDropdown';
+import GraphView from './GraphView';
 import { useState } from 'react';
 import { Icon } from '@iconify/react';
 
@@ -47,7 +48,7 @@ export default function MovieSection() {
               <MovieCard movies={movies} />
             </div>
           ) : (
-            <h1>Graph view</h1>
+            <GraphView />
           )}
         </section>
       )}
