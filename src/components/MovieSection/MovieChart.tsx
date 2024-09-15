@@ -44,6 +44,7 @@ export default function MovieChart() {
   // Configure les options du graphique
   const options = {
     responsive: true,
+    maintainAspectRatio: true,
     plugins: {
       legend: {
         position: 'top' as const, // Position de la légende
