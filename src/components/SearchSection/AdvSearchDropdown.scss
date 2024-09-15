@@ -21,7 +21,11 @@
         z-index: 1;
         cursor: pointer;
 
-        &:hover > option, .dropdown-icon {
+        option {
+            color: $black;
+        }
+
+        &:hover > .dropdown-icon {
             color: $accent;
         }
     }

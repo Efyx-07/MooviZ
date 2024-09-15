@@ -1,5 +1,6 @@
 @import '../../styles/mixins';
 @import '../../styles/vars';
+@import '../../styles/colors.scss';
 
 header {
   height: 4rem;
@@ -12,7 +13,7 @@ header {
     @include content-style;
 
     h1 {
-      color: orangered;
+      color: $accent;
     }
   }
 }
