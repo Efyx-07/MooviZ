@@ -1,9 +1,8 @@
-import './AdvSearchDropdown.scss';
 import { useEffect, useState } from 'react';
 import { Movie } from '@/interfaces/movie.interface';
 import useMovieStore from '@/stores/MovieStore';
 import { getFilmsAvailableGenres } from '@/services/movie.service';
-import { Icon } from '@iconify/react';
+import Dropdown from '../Shared/Dropdown';
 
 export default function GenreDropdown() {
   const [genres, setGenres] = useState<string[]>([]);
@@ -31,6 +30,9 @@ export default function GenreDropdown() {
     if (movieIds.length > 0) FetchGenres(movieIds);
   }, [movieIds]);
 
+  // Mappe pour récupérer les options
+  const options = genres.map((genre) => ({ label: genre, value: genre }));
+
   // Procède au filtrage selon le genre sélectionné
   const handleGenreChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const genre = event.target.value;
@@ -40,22 +42,12 @@ export default function GenreDropdown() {
 
   return (
     <div className="dropdown-container">
-      <select
-        className="advSearch-dropdown"
+      <Dropdown
         id="genre-dropdown"
-        value={selectedGenre}
+        selectedValue={selectedGenre}
         onChange={handleGenreChange}
-      >
-        <option value="">-- Genre</option>
-        {genres.map((genre) => (
-          <option key={genre} value={genre}>
-            {genre}
-          </option>
-        ))}
-      </select>
-      <Icon
-        icon="material-symbols-light:play-arrow"
-        className="dropdown-icon"
+        defaultLabel="-- Genre"
+        options={options}
       />
     </div>
   );

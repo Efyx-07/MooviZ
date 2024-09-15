@@ -1,7 +1,6 @@
-import './AdvSearchDropdown.scss';
 import useMovieStore from '@/stores/MovieStore';
 import { useState } from 'react';
-import { Icon } from '@iconify/react';
+import Dropdown from '../Shared/Dropdown';
 
 export default function NoteImdbDropdown() {
   const [selectedNoteRange, setSelectedNoteRange] = useState<string>('');
@@ -15,6 +14,13 @@ export default function NoteImdbDropdown() {
     { label: 'entre 6 et 8', min: 6.1, max: 8 },
     { label: 'entre 8 et 10', min: 8.1, max: 10 },
   ];
+
+  // Mappe pour récupérer les options
+  const options = ratingRanges.map((range) => ({
+    label: range.label,
+    min: range.min,
+    max: range.max,
+  }));
 
   // Procède au filtrage selon la plage de note sélectionnée
   const handleNoteRangeChange = (
@@ -34,22 +40,12 @@ export default function NoteImdbDropdown() {
 
   return (
     <div className="dropdown-container">
-      <select
-        className="advSearch-dropdown"
+      <Dropdown
         id="noteImdb-dropdown"
-        value={selectedNoteRange}
+        selectedValue={selectedNoteRange}
         onChange={handleNoteRangeChange}
-      >
-        <option value="">-- Sélectionnez une plage de notes</option>
-        {ratingRanges.map((range) => (
-          <option key={range.label} value={`${range.min}-${range.max}`}>
-            {range.label}
-          </option>
-        ))}
-      </select>
-      <Icon
-        icon="material-symbols-light:play-arrow"
-        className="dropdown-icon"
+        defaultLabel="-- Sélectionnez une plage de notes"
+        options={options}
       />
     </div>
   );

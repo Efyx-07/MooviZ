@@ -1,8 +1,7 @@
-import './AdvSearchDropdown.scss';
 import { Movie } from '@/interfaces/movie.interface';
 import useMovieStore from '@/stores/MovieStore';
 import { useState } from 'react';
-import { Icon } from '@iconify/react';
+import Dropdown from '../Shared/Dropdown';
 
 export default function ReleaseYearDropdown() {
   const [selectedYear, setSelectedYear] = useState<string>('');
@@ -19,6 +18,9 @@ export default function ReleaseYearDropdown() {
   //Trie les dates de la plus récente à la plus ancienne
   const sortedYears: string[] = years.sort((a, b) => parseInt(b) - parseInt(a));
 
+  // Mappe pour récupérer les options
+  const options = sortedYears.map((year) => ({ label: year, value: year }));
+
   // Procède au filtrage selon l'année sélectionnée
   const handleYearChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const year = event.target.value;
@@ -28,22 +30,12 @@ export default function ReleaseYearDropdown() {
 
   return (
     <div className="dropdown-container">
-      <select
-        className="advSearch-dropdown"
+      <Dropdown
         id="year-dropdown"
-        value={selectedYear}
+        selectedValue={selectedYear}
         onChange={handleYearChange}
-      >
-        <option value="">-- Année de sortie</option>
-        {sortedYears.map((year) => (
-          <option key={year} value={year}>
-            {year}
-          </option>
-        ))}
-      </select>
-      <Icon
-        icon="material-symbols-light:play-arrow"
-        className="dropdown-icon"
+        defaultLabel="-- Année de sortie"
+        options={options}
       />
     </div>
   );
