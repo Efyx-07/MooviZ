@@ -1,8 +1,9 @@
+import './KeywordSearchBar.scss';
 import { useState } from 'react';
 import { Movie } from '@/interfaces/movie.interface';
 import { FetchMoviesByKeywordWithGenres } from '@/services/movie.service';
 import useMovieStore from '@/stores/MovieStore';
-import Button from '../Shared/Button';
+import { Icon } from '@iconify/react';
 
 export default function KeywordSearchBar() {
   const [keyword, setKeyword] = useState<Movie['Title']>('');
@@ -23,17 +24,15 @@ export default function KeywordSearchBar() {
   return (
     <div className="keyword-searchbar">
       <input
+        className="searchBar-input"
         type="text"
         placeholder="Titre du film"
         value={keyword}
         onChange={(e) => setKeyword(e.target.value)}
       />
-      <Button
-        name="Recherche"
-        backgroundColor="orangered"
-        color="white"
-        onClick={handleSearchByKeyword}
-      />
+      <div className="searchIcon-container" onClick={handleSearchByKeyword}>
+        <Icon className="searchIcon" icon="material-symbols:search" />
+      </div>
     </div>
   );
 }
