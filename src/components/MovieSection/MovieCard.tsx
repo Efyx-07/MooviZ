@@ -34,6 +34,7 @@ export default function MovieCard({ movies }: MovieCardProps) {
           <div className="infos-container">
             <p className="movie-title">{movie.Title}</p>
             <p className="movie-year">{movie.Year}</p>
+            <p className="movie-note">{movie.imdbRating}</p>
           </div>
         </div>
       ))}

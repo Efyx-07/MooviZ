@@ -8,7 +8,8 @@ interface State {
   filterByGenre: (genre: Movie['Genre']) => void;
   filterByYear: (year: Movie['Year']) => void;
   filterByImdbRatingRange: (minRating: number, maxRating: number) => void;
-  sortByPopularity: () => void;
+  sortByPopularityAsc: () => void;
+  sortByPopularityDesc: () => void;
   sortByYearAsc: () => void;
   sortByYearDesc: () => void;
 }
@@ -60,9 +61,37 @@ const useMovieStore = create<State>((set, get) => ({
     set({ filteredMovies });
   },
 
-  sortByPopularity: () => {},
-  sortByYearAsc: () => {},
-  sortByYearDesc: () => {},
+  // Classe les films par popularité (du moins populaire au plus populaire)
+  sortByPopularityAsc: () => {
+    const sortedMovies = get()
+      .filteredMovies.slice()
+      .sort((a, b) => Number(a.imdbRating) - Number(b.imdbRating));
+    set({ filteredMovies: sortedMovies });
+  },
+
+  // Classe les films par popularité (du plus populaire au moins populaire)
+  sortByPopularityDesc: () => {
+    const sortedMovies = get()
+      .filteredMovies.slice()
+      .sort((a, b) => Number(b.imdbRating) - Number(a.imdbRating));
+    set({ filteredMovies: sortedMovies });
+  },
+
+  // Classe les films du plus ancien au plus récent)
+  sortByYearAsc: () => {
+    const sortedMovies = get()
+      .filteredMovies.slice()
+      .sort((a, b) => Number(a.Year) - Number(b.Year));
+    set({ filteredMovies: sortedMovies });
+  },
+
+  // Classe les films du plus récent au plus ancien)
+  sortByYearDesc: () => {
+    const sortedMovies = get()
+      .filteredMovies.slice()
+      .sort((a, b) => Number(b.Year) - Number(a.Year));
+    set({ filteredMovies: sortedMovies });
+  },
 }));
 
 export default useMovieStore;
