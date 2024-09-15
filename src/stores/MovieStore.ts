@@ -8,7 +8,7 @@ interface State {
   setMoviesData: (movies: Movie[]) => void;
   addMoviesToAllSearched: (movies: Movie[]) => void;
   loadMoviesFromLocalStorage: () => void;
-  saveMoviesToLocalStorage: () => void;
+  saveMoviesToLocalStorage: (movies: Movie[]) => void;
   filterByGenre: (genre: Movie['Genre']) => void;
   filterByYear: (year: Movie['Year']) => void;
   filterByImdbRatingRange: (minRating?: number, maxRating?: number) => void;
@@ -17,6 +17,8 @@ interface State {
   sortByYearAsc: () => void;
   sortByYearDesc: () => void;
 }
+
+const LOCAL_STORAGE_KEY = 'allSearchedMovies';
 
 const useMovieStore = create<State>((set, get) => ({
   initialMovies: [], // Tableau pour la iste de films initiale
@@ -32,27 +34,31 @@ const useMovieStore = create<State>((set, get) => ({
   // ===========================================================================================
   addMoviesToAllSearched: (movies: Movie[]) => {
     const currentMovies = get().allSearchedMovies;
+    // Évite les doublons
     const newMovies = movies.filter(
-      (movie) => !currentMovies.some((m) => m.imdbID === movie.imdbID), // Évite les doublons
+      (movie) => !currentMovies.some((m) => m.imdbID === movie.imdbID),
     );
-    set({ allSearchedMovies: [...currentMovies, ...newMovies] });
-    get().saveMoviesToLocalStorage();
+    const updatedMovies = [...currentMovies, ...newMovies];
+    // Met à jour allSearchedMovies
+    set({ allSearchedMovies: updatedMovies });
+    // Sauvegarde dans le local storage
+    get().saveMoviesToLocalStorage(updatedMovies);
   },
 
   // Charge allSearchedMovies depuis localStorage
   // ===========================================================================================
   loadMoviesFromLocalStorage: () => {
-    const movies = localStorage.getItem('allSearchedMovies');
-    if (movies) {
-      set({ allSearchedMovies: JSON.parse(movies) });
+    const storedMovies = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (storedMovies && get().allSearchedMovies.length === 0) {
+      // Met à jour seulement si allSearchedMovies est vide
+      set({ allSearchedMovies: JSON.parse(storedMovies) });
     }
   },
 
   // Sauvegarde allSearchedMovies dans localStorage
   // ===========================================================================================
-  saveMoviesToLocalStorage: () => {
-    const movies = get().allSearchedMovies;
-    localStorage.setItem('allSearchedMovies', JSON.stringify(movies));
+  saveMoviesToLocalStorage: (movies: Movie[]) => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(movies));
   },
 
   // Filtre les films par genre et met à jour le tableau movies avec les films filtrés
