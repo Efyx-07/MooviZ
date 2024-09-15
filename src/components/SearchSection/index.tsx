@@ -15,13 +15,11 @@ export default function SearchSection() {
         <KeywordSearchBar />
       </div>
       <div className="advanced-search">
-        <h3>Recherche avancée</h3>
+        <h3 className="advSearch-title">Recherche avancée</h3>
         <div className="dropdowns-container">
-          <div className="content">
-            <GenreDropdown />
-            <ReleaseYearDropdown />
-            <NoteImdbDropdown />
-          </div>
+          <GenreDropdown />
+          <ReleaseYearDropdown />
+          <NoteImdbDropdown />
         </div>
       </div>
     </section>

@@ -1,7 +1,9 @@
+import './AdvSearchDropdown.scss';
 import { useEffect, useState } from 'react';
 import { Movie } from '@/interfaces/movie.interface';
 import useMovieStore from '@/stores/MovieStore';
 import { getFilmsAvailableGenres } from '@/services/movie.service';
+import { Icon } from '@iconify/react';
 
 export default function GenreDropdown() {
   const [genres, setGenres] = useState<string[]>([]);
@@ -37,8 +39,9 @@ export default function GenreDropdown() {
   };
 
   return (
-    <>
+    <div className="dropdown-container">
       <select
+        className="advSearch-dropdown"
         id="genre-dropdown"
         value={selectedGenre}
         onChange={handleGenreChange}
@@ -50,6 +53,10 @@ export default function GenreDropdown() {
           </option>
         ))}
       </select>
-    </>
+      <Icon
+        icon="material-symbols-light:play-arrow"
+        className="dropdown-icon"
+      />
+    </div>
   );
 }

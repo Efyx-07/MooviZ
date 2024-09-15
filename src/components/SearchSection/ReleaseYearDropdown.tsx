@@ -1,6 +1,8 @@
+import './AdvSearchDropdown.scss';
 import { Movie } from '@/interfaces/movie.interface';
 import useMovieStore from '@/stores/MovieStore';
 import { useState } from 'react';
+import { Icon } from '@iconify/react';
 
 export default function ReleaseYearDropdown() {
   const [selectedYear, setSelectedYear] = useState<string>('');
@@ -25,8 +27,9 @@ export default function ReleaseYearDropdown() {
   };
 
   return (
-    <>
+    <div className="dropdown-container">
       <select
+        className="advSearch-dropdown"
         id="year-dropdown"
         value={selectedYear}
         onChange={handleYearChange}
@@ -38,6 +41,10 @@ export default function ReleaseYearDropdown() {
           </option>
         ))}
       </select>
-    </>
+      <Icon
+        icon="material-symbols-light:play-arrow"
+        className="dropdown-icon"
+      />
+    </div>
   );
 }

@@ -1,0 +1,39 @@
+@import '../../styles/colors.scss';
+
+.dropdown-container {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 2.5rem;
+
+    &:hover > .dropdown-icon {
+        color: $accent;
+    }
+
+    .advSearch-dropdown {
+        appearance: none;
+        background: none;
+        outline: none;
+        height: 100%;
+        width: 100%;
+        color: $white;
+        padding: 0 1rem;
+        z-index: 1;
+        cursor: pointer;
+
+        &:hover > option, .dropdown-icon {
+            color: $accent;
+        }
+    }
+
+    .dropdown-icon {
+        color: $white;
+        position: absolute;
+        top: 50%;
+        right: .5rem;
+        transform: translateY(-50%) rotate(90deg);
+        font-size: 2rem;
+        z-index: -1;
+        cursor: pointer;
+    }
+}

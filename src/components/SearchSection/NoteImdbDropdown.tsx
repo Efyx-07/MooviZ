@@ -1,5 +1,7 @@
+import './AdvSearchDropdown.scss';
 import useMovieStore from '@/stores/MovieStore';
 import { useState } from 'react';
+import { Icon } from '@iconify/react';
 
 export default function NoteTESTImdbDropdown() {
   const [selectedNoteRange, setSelectedNoteRange] = useState<string>('');
@@ -28,8 +30,9 @@ export default function NoteTESTImdbDropdown() {
   };
 
   return (
-    <>
+    <div className="dropdown-container">
       <select
+        className="advSearch-dropdown"
         id="noteImdb-dropdown"
         value={selectedNoteRange}
         onChange={handleNoteRangeChange}
@@ -41,6 +44,10 @@ export default function NoteTESTImdbDropdown() {
           </option>
         ))}
       </select>
-    </>
+      <Icon
+        icon="material-symbols-light:play-arrow"
+        className="dropdown-icon"
+      />
+    </div>
   );
 }
