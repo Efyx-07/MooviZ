@@ -7,6 +7,8 @@ interface State {
   allSearchedMovies: Movie[]; // Tableau pour stocker tous les films recherchés
   setMoviesData: (movies: Movie[]) => void;
   addMoviesToAllSearched: (movies: Movie[]) => void;
+  loadMoviesFromLocalStorage: () => void;
+  saveMoviesToLocalStorage: () => void;
   filterByGenre: (genre: Movie['Genre']) => void;
   filterByYear: (year: Movie['Year']) => void;
   filterByImdbRatingRange: (minRating?: number, maxRating?: number) => void;
@@ -32,6 +34,21 @@ const useMovieStore = create<State>((set, get) => ({
       (movie) => !currentMovies.some((m) => m.imdbID === movie.imdbID) // Évite les doublons
     );
     set({ allSearchedMovies: [...currentMovies, ...newMovies] });
+    get().saveMoviesToLocalStorage();
+  },
+
+  // Charge allSearchedMovies depuis localStorage
+  loadMoviesFromLocalStorage: () => {
+    const movies = localStorage.getItem('allSearchedMovies');
+    if (movies) {
+      set({ allSearchedMovies: JSON.parse(movies) });
+    }
+  },
+
+  // Sauvegarde allSearchedMovies dans localStorage
+  saveMoviesToLocalStorage: () => {
+    const movies = get().allSearchedMovies;
+    localStorage.setItem('allSearchedMovies', JSON.stringify(movies));
   },
 
   // Filtre les films par genre et met à jour le tableau movies avec les films filtrés
