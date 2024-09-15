@@ -1,43 +1,43 @@
 @import '../../styles/colors.scss';
 
 .keyword-searchbar {
-    position: relative;
+  position: relative;
+  width: 100%;
+  max-width: 30rem;
+  height: 3rem;
+  border-radius: 2rem;
+
+  .searchBar-input {
     width: 100%;
-    max-width: 30rem;
-    height: 3rem;
-    border-radius: 2rem;
+    height: 100%;
+    border: solid 1px rgba($white, 0.1);
+    border-radius: inherit;
+    outline: none;
+    padding-left: 1rem;
+    font-size: 1rem;
 
-    .searchBar-input {
-        width: 100%;
-        height: 100%;
-        border: solid 1px rgba($white, .1);
-        border-radius: inherit;
-        outline: none;
-        padding-left: 1rem;
-        font-size: 1rem;
-
-        &:focus {
-            border-color: $accent;
-        }
+    &:focus {
+      border-color: $accent;
     }
+  }
 
-    .searchIcon-container {
-        position: absolute;
-        top: 50%;
-        right: 1rem;
-        transform: translateY(-50%);
-        background: $accent;
-        width: 2rem;
-        height: 2rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 100%;
-        cursor: pointer;
-        transition: background .2s ease;
+  .searchIcon-container {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    background: $accent;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    cursor: pointer;
+    transition: background 0.2s ease;
 
-        &:hover {
-            background: $black;
-        }
+    &:hover {
+      background: $black;
     }
+  }
 }

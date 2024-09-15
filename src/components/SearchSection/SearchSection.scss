@@ -1,34 +1,35 @@
 @import '../../styles/breakpoints.scss';
 
 .search-section {
+  align-items: center;
+
+  .main-search,
+  .advanced-search {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    gap: 1rem;
 
-    .main-search, .advanced-search {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-
-        .search-title {
-            font-size: clamp(1.5rem, 5vw, 3rem);
-        }
-
-        .advSearch-title {
-            font-size: clamp(1rem, 4vw, 1.5rem);
-        }
-
-        .dropdowns-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
+    .search-title {
+      font-size: clamp(1.5rem, 5vw, 3rem);
     }
+
+    .advSearch-title {
+      font-size: clamp(1rem, 4vw, 1.5rem);
+    }
+
+    .dropdowns-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+  }
 }
 
 @media (min-width: $lgInter) {
-    .search-section {
-        flex-direction: row;
-    }
+  .search-section {
+    flex-direction: row;
+  }
 }

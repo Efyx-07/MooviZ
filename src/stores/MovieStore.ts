@@ -8,6 +8,9 @@ interface State {
   filterByGenre: (genre: Movie['Genre']) => void;
   filterByYear: (year: Movie['Year']) => void;
   filterByImdbRatingRange: (minRating: number, maxRating: number) => void;
+  sortByPopularity: () => void;
+  sortByYearAsc: () => void;
+  sortByYearDesc: () => void;
 }
 
 const useMovieStore = create<State>((set, get) => ({
@@ -56,6 +59,10 @@ const useMovieStore = create<State>((set, get) => ({
     });
     set({ filteredMovies });
   },
+
+  sortByPopularity: () => {},
+  sortByYearAsc: () => {},
+  sortByYearDesc: () => {},
 }));
 
 export default useMovieStore;
