@@ -24,20 +24,23 @@ const useMovieStore = create<State>((set, get) => ({
   allSearchedMovies: [], // Tableau pour tous les films recherchés
 
   // Fonction pour définir les données des films
+  // ===========================================================================================
   setMoviesData: (movies: Movie[]) =>
     set({ initialMovies: movies, filteredMovies: movies }),
 
   // Ajoute des films à allSearchedMovies
+  // ===========================================================================================
   addMoviesToAllSearched: (movies: Movie[]) => {
     const currentMovies = get().allSearchedMovies;
     const newMovies = movies.filter(
-      (movie) => !currentMovies.some((m) => m.imdbID === movie.imdbID) // Évite les doublons
+      (movie) => !currentMovies.some((m) => m.imdbID === movie.imdbID), // Évite les doublons
     );
     set({ allSearchedMovies: [...currentMovies, ...newMovies] });
     get().saveMoviesToLocalStorage();
   },
 
   // Charge allSearchedMovies depuis localStorage
+  // ===========================================================================================
   loadMoviesFromLocalStorage: () => {
     const movies = localStorage.getItem('allSearchedMovies');
     if (movies) {
@@ -46,12 +49,14 @@ const useMovieStore = create<State>((set, get) => ({
   },
 
   // Sauvegarde allSearchedMovies dans localStorage
+  // ===========================================================================================
   saveMoviesToLocalStorage: () => {
     const movies = get().allSearchedMovies;
     localStorage.setItem('allSearchedMovies', JSON.stringify(movies));
   },
 
   // Filtre les films par genre et met à jour le tableau movies avec les films filtrés
+  // ===========================================================================================
   filterByGenre: (selectedGenre: Movie['Genre']) => {
     if (selectedGenre === '') {
       // Réinitialise filteredMovies à initialMovies si le genre est vide
@@ -67,6 +72,7 @@ const useMovieStore = create<State>((set, get) => ({
   },
 
   // Filtre les films par année de sortie et met à jour le tableau movies avec les films filtrés
+  // ===========================================================================================
   filterByYear: (selectedYear: Movie['Year']) => {
     if (selectedYear === '') {
       // Réinitialise filteredMovies à initialMovies si l'année est vide
@@ -82,6 +88,7 @@ const useMovieStore = create<State>((set, get) => ({
   },
 
   // Filtre les films par plage de note Imdb et met à jour le tableau movies avec les films filtrés
+  // ===========================================================================================
   filterByImdbRatingRange: (minRating?: number, maxRating?: number) => {
     // Si minRating ou maxRating est undefined, réinitialise les films
     if (minRating === undefined || maxRating === undefined) {
@@ -97,6 +104,7 @@ const useMovieStore = create<State>((set, get) => ({
   },
 
   // Classe les films par popularité (du moins populaire au plus populaire)
+  // ===========================================================================================
   sortByPopularityAsc: () => {
     const sortedMovies = get()
       .filteredMovies.slice()
@@ -105,6 +113,7 @@ const useMovieStore = create<State>((set, get) => ({
   },
 
   // Classe les films par popularité (du plus populaire au moins populaire)
+  // ===========================================================================================
   sortByPopularityDesc: () => {
     const sortedMovies = get()
       .filteredMovies.slice()
@@ -113,6 +122,7 @@ const useMovieStore = create<State>((set, get) => ({
   },
 
   // Classe les films du plus ancien au plus récent)
+  // ===========================================================================================
   sortByYearAsc: () => {
     const sortedMovies = get()
       .filteredMovies.slice()
@@ -121,6 +131,7 @@ const useMovieStore = create<State>((set, get) => ({
   },
 
   // Classe les films du plus récent au plus ancien)
+  // ===========================================================================================
   sortByYearDesc: () => {
     const sortedMovies = get()
       .filteredMovies.slice()

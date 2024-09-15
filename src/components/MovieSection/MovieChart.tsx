@@ -33,7 +33,7 @@ export default function MovieChart() {
         label: 'IMDb Rating', // Legende du graphique
         data: filteredMovies.map((movie) =>
           parseFloat(movie.imdbRating || '0'),
-        ), // note IMDb des filteredmovies 
+        ), // note IMDb des filteredmovies
         backgroundColor: 'rgb(255, 69, 0)', // Couleur des barres
         borderColor: '#ff4500',
         borderWidth: 1,
@@ -66,7 +66,7 @@ export default function MovieChart() {
 
   return (
     <div className="movie-chart">
-        <Bar data={data} options={options} />
+      <Bar data={data} options={options} />
     </div>
   );
 }
