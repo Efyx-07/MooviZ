@@ -5,6 +5,7 @@ export interface Movie {
   Type: string;
   Poster: string;
   Genre?: string;
+  imdbRating?: string;
 }
 
 export interface MoviesSearchResponse {

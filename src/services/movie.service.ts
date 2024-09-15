@@ -10,9 +10,11 @@ export async function FetchMoviesByKeywordWithGenres(
   const movies: Movie[] = await FetchMoviesByKeyword(keyword);
   // Si aucun film trouvé, retourne un tableau vide
   if (movies.length === 0) return [];
-  // Retourne les films enrichis avec leurs genres
-  const enrichedMovies: Movie[] = await addGenresToMovies(movies);
-  return enrichedMovies;
+  // Retourne les films enrichis avec genres, imdbRating
+  const moviesWithGenre: Movie[] = await addGenresToMovies(movies);
+  const moviesWithImdbRating: Movie[] =
+    await addImdbRatingToMovies(moviesWithGenre);
+  return moviesWithImdbRating;
 }
 
 // Fetch les films par mot-clé contenu dans le titre, retourne une liste de films
@@ -45,6 +47,18 @@ async function addGenresToMovies(movies: Movie[]): Promise<Movie[]> {
   return enrichedMovies;
 }
 
+// Ajoute la donnée manquante "imdbRating" aux films, nécessaire au filtrage par popularité
+// ===========================================================================================
+async function addImdbRatingToMovies(movies: Movie[]): Promise<Movie[]> {
+  const enrichedMovies = await Promise.all(
+    movies.map(async (movie) => {
+      const movieDetails = await FetchMovieDetailsById(movie.imdbID);
+      return { ...movie, imdbRating: movieDetails.imdbRating };
+    }),
+  );
+  return enrichedMovies;
+}
+
 // Récupère le détail d'un film à partir de son imdbID
 // Retourne le film avec format API complet (API ID)
 // ===========================================================================================
@@ -65,10 +79,10 @@ export async function FetchMovieDetailsById(
   }
 }
 
-// Récupère tous les genres des films affichés à partir de leurs imdbIDs
+// Récupère les genres des films affichés à partir de leurs imdbIDs
 // Retourne un tableau de strings
 // ===========================================================================================
-export async function getAllDisplayedFilmsGenres(
+export async function getFilmsAvailableGenres(
   movieIds: string[],
 ): Promise<string[]> {
   // Creation d'un set, stocke les differents genres sans doublons

@@ -31,7 +31,7 @@ export default function ReleaseYearDropdown() {
         value={selectedYear}
         onChange={handleYearChange}
       >
-        <option value="">-- Date de sortie</option>
+        <option value="">-- Année de sortie</option>
         {sortedYears.map((year) => (
           <option key={year} value={year}>
             {year}

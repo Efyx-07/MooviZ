@@ -4,6 +4,7 @@ import '../../styles/section.scss';
 import KeywordSearchBar from './KeywordSearchBar';
 import GenreDropdown from './GenreDropdown';
 import ReleaseYearDropdown from './ReleaseYearDropdown';
+import NoteImdbDropdown from './NoteImdbDropdown';
 
 export default function SearchSection() {
   return (
@@ -14,6 +15,7 @@ export default function SearchSection() {
         <h3>Recherche avancée</h3>
         <GenreDropdown />
         <ReleaseYearDropdown />
+        <NoteImdbDropdown />
       </div>
     </section>
   );

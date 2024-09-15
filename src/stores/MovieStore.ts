@@ -7,6 +7,7 @@ interface State {
   setMoviesData: (movies: Movie[]) => void;
   filterByGenre: (genre: Movie['Genre']) => void;
   filterByYear: (year: Movie['Year']) => void;
+  filterByImdbRatingRange: (minRating: number, maxRating: number) => void;
 }
 
 const useMovieStore = create<State>((set, get) => ({
@@ -45,6 +46,15 @@ const useMovieStore = create<State>((set, get) => ({
         set({ filteredMovies });
       }
     }
+  },
+
+  // Filtre les films par plage de note Imdb et met à jour le tableau movies avec les films filtrés
+  filterByImdbRatingRange: (minRating: number, maxRating: number) => {
+    const filteredMovies = get().initialMovies.filter((movie) => {
+      const imdbRating = parseFloat(movie.imdbRating || '0');
+      return imdbRating >= minRating && imdbRating <= maxRating;
+    });
+    set({ filteredMovies });
   },
 }));
 
