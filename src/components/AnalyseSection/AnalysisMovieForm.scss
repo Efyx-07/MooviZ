@@ -13,6 +13,12 @@
     flex-direction: column;
     gap: 1rem;
 
+    .field-container {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+    }
+
     input {
       height: 2.5rem;
       //background: none;
