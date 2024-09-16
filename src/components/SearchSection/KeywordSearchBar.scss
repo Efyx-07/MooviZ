@@ -34,7 +34,7 @@
     align-items: center;
     border-radius: 100%;
     cursor: pointer;
-    transition: background 0.2s ease;
+    transition: background .2s ease;
 
     &:hover {
       background: $black;

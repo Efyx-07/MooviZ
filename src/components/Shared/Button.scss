@@ -9,4 +9,10 @@ button {
   font-size: 1rem;
   border-radius: 2rem;
   cursor: pointer;
+  transition: all .2s ease;
+
+  &:hover {
+    background: $white;
+    color: $accent;
+  }
 }
