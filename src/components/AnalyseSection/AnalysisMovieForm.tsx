@@ -6,7 +6,6 @@ import {
   MediaType,
 } from '@/interfaces/analysisCriteria.interface';
 import validateForm from '@/utils/valdateForm';
-import { getFilmsAvailableGenres } from '@/services/movie.service';
 import { useEffect, useState } from 'react';
 import { currentYear } from '@/config';
 import { filterMovies } from '@/utils/filterMovies';
@@ -18,7 +17,6 @@ interface AnalysisMovieFormProps {
 }
 
 export default function AnalysisMovieForm({ movies }: AnalysisMovieFormProps) {
-  // States
   const [genres, setGenres] = useState<string[]>([]);
   const [type, setType] = useState<AnalysisCriteria['type']>('');
   const [genre, setGenre] = useState<AnalysisCriteria['genre']>('');
@@ -30,23 +28,27 @@ export default function AnalysisMovieForm({ movies }: AnalysisMovieFormProps) {
   // Accède au store
   const analysisCriteriaStore = useAnalysisCriteriaStore();
 
-  // Extrait les ids des films pour récupérer les genres
-  const movieIds: string[] = movies.map((movie) => movie.imdbID);
-
-  // Récupère les genres disponibles et les stocke dans le state
-  async function FetchGenres(ids: string[]) {
-    try {
-      const availableGenres = await getFilmsAvailableGenres(ids);
-      setGenres(availableGenres);
-    } catch (error) {
-      throw new Error('Error while fetching genres: ' + error);
-    }
+  // Récupère tous les genres des films stockés dans le store et met à jour setGenres dans le State
+  // !! Important, évite les appels API
+  // ===========================================================================================
+  function getAllSearchedMoviesGenres(movies: Movie[]) {
+    const genreSet: Set<string> = new Set<string>(); // Création d'un Set pour éviter les doublons de genres
+    // Parcourt les movies, retrouve tous les genres disponibles
+    // split les genres (format par film: "Adventure, Drama, Thriller") et stocke chaque genre dans le set
+    movies.forEach((movie) => {
+      if (movie.Genre) {
+        movie.Genre.split(', ').forEach((genre) => genreSet.add(genre));
+      }
+    });
+    // Met à jour le state avec tous les genres
+    setGenres(Array.from(genreSet));
   }
 
   // Surveille les changements de movieIds et déclenche FetchGenres si des films son disponibles
+  // ===========================================================================================
   useEffect(() => {
-    if (movieIds.length > 0) FetchGenres(movieIds);
-  }, [movieIds]);
+    if (movies.length > 0) getAllSearchedMoviesGenres(movies);
+  }, [movies]);
 
   // Soumet le formulaire après validation des données et stocke les critères dans le store
   // ===========================================================================================
@@ -54,7 +56,7 @@ export default function AnalysisMovieForm({ movies }: AnalysisMovieFormProps) {
     event.preventDefault();
 
     if (validateForm(minRating, maxRating, startYear, endYear)) {
-      // Stocke les différent critères
+      // Stocke les différents critères
       const criteria = {
         type,
         genre,
@@ -63,7 +65,6 @@ export default function AnalysisMovieForm({ movies }: AnalysisMovieFormProps) {
         startYear,
         endYear,
       };
-
       // Stocke les critères dans le store
       analysisCriteriaStore.setCriteria(criteria);
       // Procède au filtrage des films selon les critères
