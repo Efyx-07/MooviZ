@@ -9,6 +9,7 @@ import { getFilmsAvailableGenres } from '@/services/movie.service';
 import { useEffect, useState } from 'react';
 import { currentYear } from '@/config';
 import { filterMovies } from '@/utils/filterMovies';
+import useAnalysisCriteriaStore from '@/stores/AnalysisCriteriaStore';
 
 interface AnalysisMovieFormProps {
   movies: Movie[];
@@ -26,6 +27,9 @@ export default function AnalysisMovieForm({ movies }: AnalysisMovieFormProps) {
   const [startYear, setStartYear] =
     useState<AnalysisCriteria['startYear']>(null);
   const [endYear, setEndYear] = useState<AnalysisCriteria['endYear']>(null);
+
+  // Accède au store
+  const analysisCriteriaStore = useAnalysisCriteriaStore();
 
   // Extrait les ids des films pour récupérer les genres
   const movieIds: string[] = movies.map((movie) => movie.imdbID);
@@ -68,14 +72,20 @@ export default function AnalysisMovieForm({ movies }: AnalysisMovieFormProps) {
     event.preventDefault();
 
     if (validateForm()) {
-      filterMovies({
+      // Stocke les différent critères
+      const criteria = {
         type,
         genre,
         minRating,
         maxRating,
         startYear,
         endYear,
-      });
+      };
+
+      // Stocke les critères dans le store
+      analysisCriteriaStore.setCriteria(criteria);
+      // Procède au filtrage des films selon les critères
+      filterMovies(criteria);
     }
   };
 

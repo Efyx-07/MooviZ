@@ -16,7 +16,7 @@ const useAnalysisCriteriaStore = create<State>((set, get) => ({
     maxRating: null,
     startYear: null,
     endYear: null,
-  }, // Objet des critère d'analyse
+  }, // Objet des critères d'analyse
 
   // Met à jour les critères d'analyse
   // ===========================================================================================
