@@ -8,18 +8,18 @@ import { useEffect } from 'react';
 import FiltersForm from './FiltersForm';
 import ResultsView from './ResultsView';
 
-// Ne s'affiche que si des films sont stockés dans le local-storage
-// ===========================================================================================
 export default function AnalyseSection() {
   const movieStore = useMovieStore();
   const movies: Movie[] = movieStore.allSearchedMovies;
 
-  // Charger les films du local storage au montage du composant
+  // Charge les films du local-storage au montage du composant
   useEffect(() => {
     movieStore.loadMoviesFromLocalStorage();
   }, [movieStore]);
 
   return (
+    // Ne s'affiche que si des films sont stockés dans le local-storage
+    // ===========================================================================================
     <>
       {movies.length > 0 && (
         <section className="analyse-section">

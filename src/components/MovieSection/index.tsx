@@ -4,7 +4,6 @@ import '../../styles/section.scss';
 import './MovieSection.scss';
 import useMovieStore from '@/stores/MovieStore';
 import { Movie } from '@/interfaces/movie.interface';
-import MovieCard from './MovieCard';
 import RankingDropdown from './RankingDropdown';
 import PosterView from './PosterView';
 import GraphView from './GraphView';
@@ -24,6 +23,8 @@ export default function MovieSection() {
   };
 
   return (
+    // Ne s'affiche que si des films sont stockés dans la propriété filteredMovies
+    // ===========================================================================================
     <>
       {movies.length > 0 && (
         <section className="movie-section">
