@@ -5,6 +5,7 @@ import {
   AnalysisCriteria,
   MediaType,
 } from '@/interfaces/analysisCriteria.interface';
+import validateForm from '@/utils/valdateForm';
 import { getFilmsAvailableGenres } from '@/services/movie.service';
 import { useEffect, useState } from 'react';
 import { currentYear } from '@/config';
@@ -42,23 +43,6 @@ export default function AnalysisMovieForm({ movies }: AnalysisMovieFormProps) {
     }
   }
 
-  // Validation des champs number mini/maxi (la valeur mini doit toujours etre inférieure à la valeur maxi)
-  const validateForm = () => {
-    if (minRating !== null && maxRating !== null && minRating > maxRating) {
-      alert(
-        'La note minimale doit être inférieure ou égale à la note maximale.',
-      );
-      return false;
-    }
-    if (startYear !== null && endYear !== null && startYear > endYear) {
-      alert(
-        "L'année de départ doit être inférieure ou égale à l'année de fin.",
-      );
-      return false;
-    }
-    return true;
-  };
-
   // Surveille les changements de movieIds et déclenche FetchGenres si des films son disponibles
   useEffect(() => {
     if (movieIds.length > 0) FetchGenres(movieIds);
@@ -69,7 +53,7 @@ export default function AnalysisMovieForm({ movies }: AnalysisMovieFormProps) {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    if (validateForm()) {
+    if (validateForm(minRating, maxRating, startYear, endYear)) {
       // Stocke les différent critères
       const criteria = {
         type,
