@@ -6,3 +6,7 @@ const OmdbApiKey: string | undefined = process.env.NEXT_PUBLIC_OMDB_APIKEY;
 // ===========================================================================================
 export const OmdbBaseUrl: string | undefined =
   `http://www.omdbapi.com/?apikey=${OmdbApiKey}&`;
+
+// Récupère l'année en cour
+// ===========================================================================================
+export const currentYear: number = new Date().getFullYear();

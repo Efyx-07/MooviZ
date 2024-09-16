@@ -1,8 +1,8 @@
 import './Footer.scss';
+import { currentYear } from '@/config';
 
 export default function Footer() {
-  const year = new Date().getFullYear();
-  const copyright = `© ${year} Mooviz. Tous droits réservés.`;
+  const copyright = `© ${currentYear} Mooviz. Tous droits réservés.`;
 
   return (
     <footer>

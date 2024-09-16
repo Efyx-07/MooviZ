@@ -5,7 +5,7 @@ import './AnalyseSection.scss';
 import { Movie } from '@/interfaces/movie.interface';
 import useMovieStore from '@/stores/MovieStore';
 import { useEffect } from 'react';
-import FiltersForm from './FiltersForm';
+import AnalysisMovieForm from './AnalysisMovieForm';
 import ResultsView from './ResultsView';
 
 export default function AnalyseSection() {
@@ -25,7 +25,7 @@ export default function AnalyseSection() {
         <section className="analyse-section">
           <h2>Analyse personnalisée</h2>
           <div className="analyse-container">
-            <FiltersForm />
+            <AnalysisMovieForm movies={movies} />
             <ResultsView />
           </div>
         </section>
