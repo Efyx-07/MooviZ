@@ -1,13 +1,35 @@
-import '../../styles/section.scss';
-import LsFilmList from './LsFilmList';
+'use client';
 
+import '../../styles/section.scss';
+import './AnalyseSection.scss';
+import { Movie } from '@/interfaces/movie.interface';
+import useMovieStore from '@/stores/MovieStore';
+import { useEffect } from 'react';
+import FiltersForm from './FiltersForm';
+import ResultsView from './ResultsView';
+
+// Ne s'affiche que si des films sont stockés dans le local-storage
+// ===========================================================================================
 export default function AnalyseSection() {
+  const movieStore = useMovieStore();
+  const movies: Movie[] = movieStore.allSearchedMovies;
+
+  // Charger les films du local storage au montage du composant
+  useEffect(() => {
+    movieStore.loadMoviesFromLocalStorage();
+  }, [movieStore]);
+
   return (
-    <section className="analyse-section">
-      <div className="content">
-        <h2>Analyse personnalisée</h2>
-        <LsFilmList />
-      </div>
-    </section>
+    <>
+      {movies.length > 0 && (
+        <section className="analyse-section">
+          <h2>Analyse personnalisée</h2>
+          <div className="analyse-container">
+            <FiltersForm />
+            <ResultsView />
+          </div>
+        </section>
+      )}
+    </>
   );
 }

@@ -1,0 +1,11 @@
+@import '../../styles/colors.scss';
+@import '../../styles/vars';
+
+.results-view {
+    background: $blackRelief;
+    border: $light-border;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+}

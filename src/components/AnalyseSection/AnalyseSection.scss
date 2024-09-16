@@ -1,0 +1,11 @@
+@import '../../styles/breakpoints.scss';
+
+.analyse-section {
+    padding: 2rem;
+
+    .analyse-container {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 1rem;
+    }
+}
