@@ -4,15 +4,19 @@ import { Movie } from '@/interfaces/movie.interface';
 import { getFilmsAvailableGenres } from '@/services/movie.service';
 import { useEffect, useState } from 'react';
 import { currentYear } from '@/config';
+import { filterMovies } from '@/utils/filterMovies';
 
 interface AnalysisMovieFormProps {
   movies: Movie[];
 }
 
+// Typage pour le type d'un film tel que dans l'API
+type MediaType = 'movie' | 'series';
+
 export default function AnalysisMovieForm({ movies }: AnalysisMovieFormProps) {
   // States
   const [genres, setGenres] = useState<string[]>([]);
-  const [type, setType] = useState<string>('');
+  const [type, setType] = useState<MediaType | ''>('');
   const [genre, setGenre] = useState<string>('');
   const [minRating, setMinRating] = useState<number | ''>('');
   const [maxRating, setMaxRating] = useState<number | ''>('');
@@ -32,15 +36,48 @@ export default function AnalysisMovieForm({ movies }: AnalysisMovieFormProps) {
     }
   }
 
+  // Validation des champs number mini/maxi (la valeur mini doit toujours etre inférieure à la valeur maxi)
+  const validateForm = () => {
+    if (minRating !== '' && maxRating !== '' && minRating > maxRating) {
+      alert(
+        'La note minimale doit être inférieure ou égale à la note maximale.',
+      );
+      return false;
+    }
+    if (startYear !== '' && endYear !== '' && startYear > endYear) {
+      alert(
+        "L'année de départ doit être inférieure ou égale à l'année de fin.",
+      );
+      return false;
+    }
+    return true;
+  };
+
   // Surveille les changements de movieIds et déclenche FetchGenres si des films son disponibles
   useEffect(() => {
     if (movieIds.length > 0) FetchGenres(movieIds);
   }, [movieIds]);
 
+  // Soumet le formulaire
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    if (validateForm()) {
+      filterMovies({
+        type,
+        genre,
+        minRating,
+        maxRating,
+        startYear,
+        endYear,
+      });
+    }
+  };
+
   return (
     <div className="analysis-movie-form-container">
       <h3>Vos critères de recherche</h3>
-      <form className="analysis-movie-form">
+      <form className="analysis-movie-form" onSubmit={handleSubmit}>
         {/* Dropdown Type */}
         <div className="field-container">
           <label htmlFor="type">Type</label>
@@ -49,12 +86,12 @@ export default function AnalysisMovieForm({ movies }: AnalysisMovieFormProps) {
             id="type"
             value={type}
             onChange={(e) => {
-              setType(e.target.value);
+              setType(e.target.value as MediaType);
             }}
           >
             <option value="">-- Type</option>
-            <option value="">Film</option>
-            <option value="">Série</option>
+            <option value="movie">Film</option>
+            <option value="series">Série</option>
           </select>
         </div>
 

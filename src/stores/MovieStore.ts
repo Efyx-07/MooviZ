@@ -4,7 +4,8 @@ import { Movie } from '@/interfaces/movie.interface';
 interface State {
   initialMovies: Movie[];
   filteredMovies: Movie[];
-  allSearchedMovies: Movie[]; // Tableau pour stocker tous les films recherchés
+  allSearchedMovies: Movie[];
+  analysedMovies: Movie[];
   setMoviesData: (movies: Movie[]) => void;
   addMoviesToAllSearched: (movies: Movie[]) => void;
   loadMoviesFromLocalStorage: () => void;
@@ -16,6 +17,7 @@ interface State {
   sortByPopularityDesc: () => void;
   sortByYearAsc: () => void;
   sortByYearDesc: () => void;
+  setAnalysedMovies: (movies: Movie[]) => void;
 }
 
 const LOCAL_STORAGE_KEY = 'allSearchedMovies';
@@ -24,6 +26,7 @@ const useMovieStore = create<State>((set, get) => ({
   initialMovies: [], // Tableau pour la iste de films initiale
   filteredMovies: [], // Tableau pour la liste de films filtrés
   allSearchedMovies: [], // Tableau pour tous les films recherchés
+  analysedMovies: [], // Tableau pour tous les films filtrés par l'analyse
 
   // Fonction pour définir les données des films
   // ===========================================================================================
@@ -143,6 +146,12 @@ const useMovieStore = create<State>((set, get) => ({
       .filteredMovies.slice()
       .sort((a, b) => Number(b.Year) - Number(a.Year));
     set({ filteredMovies: sortedMovies });
+  },
+
+  // Met à jour les films analysés
+  // ===========================================================================================
+  setAnalysedMovies: (movies: Movie[]) => {
+    set({ analysedMovies: movies });
   },
 }));
 
