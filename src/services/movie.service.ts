@@ -3,7 +3,7 @@ import { Movie, MoviesSearchResponse } from '@/interfaces/movie.interface';
 
 // Fetch les films par mot-clé contenu dans le titre, retourne une liste de films
 // ===========================================================================================
-async function FetchMoviesByKeyword(keyword: string): Promise<Movie[]> {
+export async function FetchMoviesByKeyword(keyword: string): Promise<Movie[]> {
   // Route de l'API en mode "by search" (s)
   const url = `${OmdbBaseUrl}&s=${keyword}`;
   try {
@@ -37,7 +37,7 @@ export async function getMoviesByKeywordWithGenres(
 
 // Ajoute la donnée manquante "Genre" aux films, nécessaire au filtrage par genre
 // ===========================================================================================
-async function addGenresToMovies(movies: Movie[]): Promise<Movie[]> {
+export async function addGenresToMovies(movies: Movie[]): Promise<Movie[]> {
   const enrichedMovies = await Promise.all(
     movies.map(async (movie) => {
       const movieDetails = await FetchMovieDetailsById(movie.imdbID);
@@ -49,7 +49,7 @@ async function addGenresToMovies(movies: Movie[]): Promise<Movie[]> {
 
 // Ajoute la donnée manquante "imdbRating" aux films, nécessaire au filtrage par popularité
 // ===========================================================================================
-async function addImdbRatingToMovies(movies: Movie[]): Promise<Movie[]> {
+export async function addImdbRatingToMovies(movies: Movie[]): Promise<Movie[]> {
   const enrichedMovies = await Promise.all(
     movies.map(async (movie) => {
       const movieDetails = await FetchMovieDetailsById(movie.imdbID);
