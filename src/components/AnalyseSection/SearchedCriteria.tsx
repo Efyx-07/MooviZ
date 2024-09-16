@@ -20,12 +20,12 @@ export default function SearchedCriteria() {
           <p>Recherche:</p>
           {criteria.type && <p>Type: {criteria.type}</p>}
           {criteria.genre && <p>Genre: {criteria.genre}</p>}
-          {criteria.minRating !== null && criteria.maxRating !== null && (
+          {criteria.minRating !== '' && criteria.maxRating !== null && (
             <p>
               Note: {criteria.minRating} à {criteria.maxRating}
             </p>
           )}
-          {criteria.startYear !== null && criteria.endYear !== null && (
+          {criteria.startYear !== '' && criteria.endYear !== null && (
             <p>
               Année: {criteria.startYear} à {criteria.endYear}
             </p>
