@@ -1,22 +1,6 @@
 import { OmdbBaseUrl } from '@/config';
 import { Movie, MoviesSearchResponse } from '@/interfaces/movie.interface';
 
-// Fetch les films par mot-clé, enrichit les films avec leurs genres et les retourne
-// ===========================================================================================
-export async function FetchMoviesByKeywordWithGenres(
-  keyword: string,
-): Promise<Movie[]> {
-  // Récupère les films par mot-clé
-  const movies: Movie[] = await FetchMoviesByKeyword(keyword);
-  // Si aucun film trouvé, retourne un tableau vide
-  if (movies.length === 0) return [];
-  // Retourne les films enrichis avec genres, imdbRating
-  const moviesWithGenre: Movie[] = await addGenresToMovies(movies);
-  const moviesWithImdbRating: Movie[] =
-    await addImdbRatingToMovies(moviesWithGenre);
-  return moviesWithImdbRating;
-}
-
 // Fetch les films par mot-clé contenu dans le titre, retourne une liste de films
 // ===========================================================================================
 async function FetchMoviesByKeyword(keyword: string): Promise<Movie[]> {
@@ -33,6 +17,22 @@ async function FetchMoviesByKeyword(keyword: string): Promise<Movie[]> {
   } catch (error) {
     throw new Error('Error while fetching movies: ' + error);
   }
+}
+
+// Fetch les films par mot-clé, enrichit les films avec leurs genres et les retourne
+// ===========================================================================================
+export async function getMoviesByKeywordWithGenres(
+  keyword: string,
+): Promise<Movie[]> {
+  // Récupère les films par mot-clé
+  const movies: Movie[] = await FetchMoviesByKeyword(keyword);
+  // Si aucun film trouvé, retourne un tableau vide
+  if (movies.length === 0) return [];
+  // Retourne les films enrichis avec genres, imdbRating
+  const moviesWithGenre: Movie[] = await addGenresToMovies(movies);
+  const moviesWithImdbRating: Movie[] =
+    await addImdbRatingToMovies(moviesWithGenre);
+  return moviesWithImdbRating;
 }
 
 // Ajoute la donnée manquante "Genre" aux films, nécessaire au filtrage par genre
