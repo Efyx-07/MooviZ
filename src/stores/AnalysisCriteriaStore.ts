@@ -10,12 +10,12 @@ interface State {
 // ===========================================================================================
 const useAnalysisCriteriaStore = create<State>((set, get) => ({
   criteria: {
-    type: null,
-    genre: null,
-    minRating: null,
-    maxRating: null,
-    startYear: null,
-    endYear: null,
+    type: '',
+    genre: '',
+    minRating: '',
+    maxRating: '',
+    startYear: '',
+    endYear: '',
   }, // Objet des critères d'analyse
 
   // Met à jour les critères d'analyse

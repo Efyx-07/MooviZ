@@ -32,12 +32,12 @@ export function filterMovies(criteria: {
       : true;
     // filtre les notes mini et maxi
     const matchesMinRating =
-      criteria.minRating !== null
-        ? Number(movie.imdbRating) >= criteria.minRating
+      criteria.minRating !== ''
+        ? Number(movie.imdbRating) >= Number(criteria.minRating)
         : true;
     const matchesMaxRating =
-      criteria.maxRating !== null
-        ? Number(movie.imdbRating) <= criteria.maxRating
+      criteria.maxRating !== ''
+        ? Number(movie.imdbRating) <= Number(criteria.maxRating)
         : true;
 
     // Analyse l'année du film
@@ -47,15 +47,15 @@ export function filterMovies(criteria: {
 
     // Vérifie la correspondance des années
     const matchesStartYear =
-      criteria.startYear !== null
+      criteria.startYear !== ''
         ? movieEndYear === null
-          ? movieStartYear >= criteria.startYear
-          : movieEndYear >= criteria.startYear
+          ? movieStartYear >= Number(criteria.startYear)
+          : movieEndYear >= Number(criteria.startYear)
         : true;
     const matchesEndYear =
-      criteria.endYear !== null
-        ? movieStartYear <= criteria.endYear &&
-          (movieEndYear === null || movieEndYear <= criteria.endYear)
+      criteria.endYear !== ''
+        ? movieStartYear <= Number(criteria.endYear) &&
+          (movieEndYear === null || movieEndYear <= Number(criteria.endYear))
         : true;
 
     return (

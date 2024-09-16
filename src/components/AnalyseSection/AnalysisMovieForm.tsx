@@ -19,15 +19,12 @@ interface AnalysisMovieFormProps {
 export default function AnalysisMovieForm({ movies }: AnalysisMovieFormProps) {
   // States
   const [genres, setGenres] = useState<string[]>([]);
-  const [type, setType] = useState<AnalysisCriteria['type']>(null);
-  const [genre, setGenre] = useState<AnalysisCriteria['genre']>(null);
-  const [minRating, setMinRating] =
-    useState<AnalysisCriteria['minRating']>(null);
-  const [maxRating, setMaxRating] =
-    useState<AnalysisCriteria['maxRating']>(null);
-  const [startYear, setStartYear] =
-    useState<AnalysisCriteria['startYear']>(null);
-  const [endYear, setEndYear] = useState<AnalysisCriteria['endYear']>(null);
+  const [type, setType] = useState<AnalysisCriteria['type']>('');
+  const [genre, setGenre] = useState<AnalysisCriteria['genre']>('');
+  const [minRating, setMinRating] = useState<AnalysisCriteria['minRating']>('');
+  const [maxRating, setMaxRating] = useState<AnalysisCriteria['maxRating']>('');
+  const [startYear, setStartYear] = useState<AnalysisCriteria['startYear']>('');
+  const [endYear, setEndYear] = useState<AnalysisCriteria['endYear']>('');
 
   // Accède au store
   const analysisCriteriaStore = useAnalysisCriteriaStore();
@@ -133,7 +130,7 @@ export default function AnalysisMovieForm({ movies }: AnalysisMovieFormProps) {
             id="minRating"
             value={minRating as number}
             onChange={(e) =>
-              setMinRating(e.target.value ? Number(e.target.value) : null)
+              setMinRating(e.target.value ? Number(e.target.value) : '')
             }
             min="0"
             max="10"
@@ -149,7 +146,7 @@ export default function AnalysisMovieForm({ movies }: AnalysisMovieFormProps) {
             id="maxRating"
             value={maxRating as number}
             onChange={(e) =>
-              setMaxRating(e.target.value ? Number(e.target.value) : null)
+              setMaxRating(e.target.value ? Number(e.target.value) : '')
             }
             min="0"
             max="10"
@@ -165,7 +162,7 @@ export default function AnalysisMovieForm({ movies }: AnalysisMovieFormProps) {
             id="startYear"
             value={startYear as number}
             onChange={(e) =>
-              setStartYear(e.target.value ? Number(e.target.value) : null)
+              setStartYear(e.target.value ? Number(e.target.value) : '')
             }
             min="1900"
             max={currentYear}
@@ -181,7 +178,7 @@ export default function AnalysisMovieForm({ movies }: AnalysisMovieFormProps) {
             id="endYear"
             value={endYear as number}
             onChange={(e) =>
-              setEndYear(e.target.value ? Number(e.target.value) : null)
+              setEndYear(e.target.value ? Number(e.target.value) : '')
             }
             min="1900"
             max={currentYear}

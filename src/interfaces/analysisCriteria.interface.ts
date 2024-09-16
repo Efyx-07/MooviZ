@@ -1,12 +1,12 @@
 // Interface des critères d'analyse
 // ===========================================================================================
 export interface AnalysisCriteria {
-  type: MediaType | null;
-  genre: string | null;
-  minRating: number | null;
-  maxRating: number | null;
-  startYear: number | null;
-  endYear: number | null;
+  type: MediaType | string;
+  genre: string | string;
+  minRating: number | string;
+  maxRating: number | string;
+  startYear: number | string;
+  endYear: number | string;
 }
 
 export type MediaType = 'movie' | 'series';

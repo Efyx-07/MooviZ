@@ -8,10 +8,10 @@ export default function SearchedCriteria() {
   const hasCriteria =
     criteria.type ||
     criteria.genre ||
-    criteria.minRating !== null ||
-    criteria.maxRating !== null ||
-    criteria.startYear !== null ||
-    criteria.endYear !== null;
+    criteria.minRating !== '' ||
+    criteria.maxRating !== '' ||
+    criteria.startYear !== '' ||
+    criteria.endYear !== '';
 
   return (
     <>
