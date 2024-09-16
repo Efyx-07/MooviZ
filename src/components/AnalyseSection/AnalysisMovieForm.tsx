@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import { currentYear } from '@/config';
 import { filterMovies } from '@/utils/filterMovies';
 import useAnalysisCriteriaStore from '@/stores/AnalysisCriteriaStore';
+import Dropdown from '../Shared/Dropdown';
 
 interface AnalysisMovieFormProps {
   movies: Movie[];
@@ -96,36 +97,31 @@ export default function AnalysisMovieForm({ movies }: AnalysisMovieFormProps) {
         {/* Dropdown Type */}
         <div className="field-container">
           <label htmlFor="type">Type</label>
-          <select
-            name="type"
+          <Dropdown
             id="type"
-            value={type as MediaType}
-            onChange={(e) => {
-              setType(e.target.value as MediaType);
-            }}
-          >
-            <option value="">-- Type</option>
-            <option value="movie">Film</option>
-            <option value="series">Série</option>
-          </select>
+            selectedValue={type as MediaType}
+            onChange={(e) => setType(e.target.value as MediaType)}
+            defaultLabel="-- Type"
+            options={[
+              { label: 'Film', value: 'movie' },
+              { label: 'Série', value: 'series' },
+            ]}
+          />
         </div>
 
         {/* Dropdown Type */}
         <div className="field-container">
           <label htmlFor="genre">Genre</label>
-          <select
-            name="genre"
+          <Dropdown
             id="genre"
-            value={genre as string}
-            onChange={(e) => {
-              setGenre(e.target.value);
-            }}
-          >
-            <option value="">-- Genre</option>
-            {genres.map((genre) => (
-              <option key={genre}>{genre}</option>
-            ))}
-          </select>
+            selectedValue={genre as string}
+            onChange={(e) => setGenre(e.target.value)}
+            defaultLabel="-- Genre"
+            options={genres.map((genre) => ({
+              label: genre,
+              value: genre,
+            }))}
+          />
         </div>
 
         {/* Input number MinRating */}
