@@ -39,7 +39,7 @@ export default function ResultsView() {
       </div>
 
       {movies.length > 0 && (
-        <div>
+        <div className="results-appear">
           <SearchedCriteria />
           {isMovieListView ? (
             <MovieListView movies={movies} />

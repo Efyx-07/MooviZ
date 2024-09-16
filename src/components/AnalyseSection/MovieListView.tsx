@@ -1,3 +1,4 @@
+import './MovieListView.scss';
 import { Movie } from '@/interfaces/movie.interface';
 
 interface MovieListViewProps {

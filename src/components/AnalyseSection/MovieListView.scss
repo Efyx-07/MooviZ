@@ -1,0 +1,39 @@
+@import '../../styles/colors.scss';
+
+.movie-list-container {
+  height: 50dvh;
+  overflow-y: auto;
+  scrollbar-color: $accent;
+  scrollbar-width: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  &::-webkit-scrollbar {
+    width: 0.75rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $black;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $accent; /* color of the scroll thumb */
+    border-radius: 10px; /* roundness of the scroll thumb */
+    border: 3px solid $black; /* creates padding around scroll thumb */
+  }
+
+  &::-moz-scrollbar-track {
+    background: $black;
+  }
+
+  &::-moz-scrollbar-thumb {
+    background: $accent;
+    border-radius: 100%;
+    border: 3px solid $black;
+  }
+
+  p {
+    font-size: .9rem;
+  }
+}

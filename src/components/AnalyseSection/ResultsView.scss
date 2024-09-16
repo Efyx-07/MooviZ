@@ -14,4 +14,10 @@
     align-items: center;
     justify-content: space-between;
   }
+
+  .results-appear {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
