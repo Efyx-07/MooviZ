@@ -1,14 +1,15 @@
 import useMovieStore from '@/stores/MovieStore';
+import { AnalysisCriteria } from '@/interfaces/analysisCriteria.interface';
 
 // Filtre les films selon les critéres de l'analyse, retourne les résultats et met à jour analysedMovies avec les résultats
 // ===========================================================================================
 export function filterMovies(criteria: {
-  type: string;
-  genre: string;
-  minRating: number | '';
-  maxRating: number | '';
-  startYear: number | '';
-  endYear: number | '';
+  type: AnalysisCriteria['type'];
+  genre: AnalysisCriteria['genre'];
+  minRating: AnalysisCriteria['minRating'];
+  maxRating: AnalysisCriteria['maxRating'];
+  startYear: AnalysisCriteria['startYear'];
+  endYear: AnalysisCriteria['endYear'];
 }) {
   const { allSearchedMovies, setAnalysedMovies } = useMovieStore.getState();
 
@@ -31,11 +32,11 @@ export function filterMovies(criteria: {
       : true;
     // filtre les notes mini et maxi
     const matchesMinRating =
-      criteria.minRating !== ''
+      criteria.minRating !== null
         ? Number(movie.imdbRating) >= criteria.minRating
         : true;
     const matchesMaxRating =
-      criteria.maxRating !== ''
+      criteria.maxRating !== null
         ? Number(movie.imdbRating) <= criteria.maxRating
         : true;
 
@@ -46,13 +47,13 @@ export function filterMovies(criteria: {
 
     // Vérifie la correspondance des années
     const matchesStartYear =
-      criteria.startYear !== ''
+      criteria.startYear !== null
         ? movieEndYear === null
           ? movieStartYear >= criteria.startYear
           : movieEndYear >= criteria.startYear
         : true;
     const matchesEndYear =
-      criteria.endYear !== ''
+      criteria.endYear !== null
         ? movieStartYear <= criteria.endYear &&
           (movieEndYear === null || movieEndYear <= criteria.endYear)
         : true;

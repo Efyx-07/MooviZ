@@ -1,6 +1,10 @@
 import './AnalysisMovieForm.scss';
 import Button from '../Shared/Button';
 import { Movie } from '@/interfaces/movie.interface';
+import {
+  AnalysisCriteria,
+  MediaType,
+} from '@/interfaces/analysisCriteria.interface';
 import { getFilmsAvailableGenres } from '@/services/movie.service';
 import { useEffect, useState } from 'react';
 import { currentYear } from '@/config';
@@ -10,18 +14,18 @@ interface AnalysisMovieFormProps {
   movies: Movie[];
 }
 
-// Typage pour le type d'un film tel que dans l'API
-type MediaType = 'movie' | 'series';
-
 export default function AnalysisMovieForm({ movies }: AnalysisMovieFormProps) {
   // States
   const [genres, setGenres] = useState<string[]>([]);
-  const [type, setType] = useState<MediaType | ''>('');
-  const [genre, setGenre] = useState<string>('');
-  const [minRating, setMinRating] = useState<number | ''>('');
-  const [maxRating, setMaxRating] = useState<number | ''>('');
-  const [startYear, setStartYear] = useState<number | ''>('');
-  const [endYear, setEndYear] = useState<number | ''>('');
+  const [type, setType] = useState<AnalysisCriteria['type']>(null);
+  const [genre, setGenre] = useState<AnalysisCriteria['genre']>(null);
+  const [minRating, setMinRating] =
+    useState<AnalysisCriteria['minRating']>(null);
+  const [maxRating, setMaxRating] =
+    useState<AnalysisCriteria['maxRating']>(null);
+  const [startYear, setStartYear] =
+    useState<AnalysisCriteria['startYear']>(null);
+  const [endYear, setEndYear] = useState<AnalysisCriteria['endYear']>(null);
 
   // Extrait les ids des films pour récupérer les genres
   const movieIds: string[] = movies.map((movie) => movie.imdbID);
@@ -38,13 +42,13 @@ export default function AnalysisMovieForm({ movies }: AnalysisMovieFormProps) {
 
   // Validation des champs number mini/maxi (la valeur mini doit toujours etre inférieure à la valeur maxi)
   const validateForm = () => {
-    if (minRating !== '' && maxRating !== '' && minRating > maxRating) {
+    if (minRating !== null && maxRating !== null && minRating > maxRating) {
       alert(
         'La note minimale doit être inférieure ou égale à la note maximale.',
       );
       return false;
     }
-    if (startYear !== '' && endYear !== '' && startYear > endYear) {
+    if (startYear !== null && endYear !== null && startYear > endYear) {
       alert(
         "L'année de départ doit être inférieure ou égale à l'année de fin.",
       );
@@ -58,7 +62,8 @@ export default function AnalysisMovieForm({ movies }: AnalysisMovieFormProps) {
     if (movieIds.length > 0) FetchGenres(movieIds);
   }, [movieIds]);
 
-  // Soumet le formulaire
+  // Soumet le formulaire après validation des données et stocke les critères dans le store
+  // ===========================================================================================
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
@@ -84,7 +89,7 @@ export default function AnalysisMovieForm({ movies }: AnalysisMovieFormProps) {
           <select
             name="type"
             id="type"
-            value={type}
+            value={type as MediaType}
             onChange={(e) => {
               setType(e.target.value as MediaType);
             }}
@@ -101,7 +106,7 @@ export default function AnalysisMovieForm({ movies }: AnalysisMovieFormProps) {
           <select
             name="genre"
             id="genre"
-            value={genre}
+            value={genre as string}
             onChange={(e) => {
               setGenre(e.target.value);
             }}
@@ -120,9 +125,9 @@ export default function AnalysisMovieForm({ movies }: AnalysisMovieFormProps) {
             type="number"
             name="minRating"
             id="minRating"
-            value={minRating}
+            value={minRating as number}
             onChange={(e) =>
-              setMinRating(e.target.value ? Number(e.target.value) : '')
+              setMinRating(e.target.value ? Number(e.target.value) : null)
             }
             min="0"
             max="10"
@@ -136,9 +141,9 @@ export default function AnalysisMovieForm({ movies }: AnalysisMovieFormProps) {
             type="number"
             name="maxRating"
             id="maxRating"
-            value={maxRating}
+            value={maxRating as number}
             onChange={(e) =>
-              setMaxRating(e.target.value ? Number(e.target.value) : '')
+              setMaxRating(e.target.value ? Number(e.target.value) : null)
             }
             min="0"
             max="10"
@@ -152,9 +157,9 @@ export default function AnalysisMovieForm({ movies }: AnalysisMovieFormProps) {
             type="number"
             name="startYear"
             id="startYear"
-            value={startYear}
+            value={startYear as number}
             onChange={(e) =>
-              setStartYear(e.target.value ? Number(e.target.value) : '')
+              setStartYear(e.target.value ? Number(e.target.value) : null)
             }
             min="1900"
             max={currentYear}
@@ -168,9 +173,9 @@ export default function AnalysisMovieForm({ movies }: AnalysisMovieFormProps) {
             type="number"
             name="endYear"
             id="endYear"
-            value={endYear}
+            value={endYear as number}
             onChange={(e) =>
-              setEndYear(e.target.value ? Number(e.target.value) : '')
+              setEndYear(e.target.value ? Number(e.target.value) : null)
             }
             min="1900"
             max={currentYear}

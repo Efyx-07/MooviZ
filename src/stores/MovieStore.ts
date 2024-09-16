@@ -22,6 +22,8 @@ interface State {
 
 const LOCAL_STORAGE_KEY = 'allSearchedMovies';
 
+// Store pour la gestion des états des films
+// ===========================================================================================
 const useMovieStore = create<State>((set, get) => ({
   initialMovies: [], // Tableau pour la iste de films initiale
   filteredMovies: [], // Tableau pour la liste de films filtrés
