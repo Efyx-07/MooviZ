@@ -1,5 +1,5 @@
 # MooviZ
-Application de Recherche et Gestion de Films avec Analyse Visuelle
+**Application de Recherche et Gestion de Films avec Analyse Visuelle**
 
 ## Description
 Cette application web permet aux utilisateurs de rechercher des films via l'API publique OMDb, de filtrer les résultats, et de visualiser des classements dynamiques selon différents critères. Les utilisateurs peuvent définir leurs propres critères de classement (année de sortie, popularité, etc.) et afficher les résultats sous forme de graphiques interactifs.
@@ -68,6 +68,14 @@ Des tests unitaires ont été écrits pour assurer le bon fonctionnement des fon
 L'API OMDb est une base de données de films en ligne qui fournit des informations détaillées sur les films (titre, année de sortie, acteurs, synopsis, etc.). L'application utilise cette API pour récupérer les données de films en temps réel. Chaque requête à l'API nécessite une clé API, qui est stockée dans un fichier .env pour des raisons de sécurité.
 
 **À noter** : Dans sa forme actuelle, l’application ne sollicite l’API OMDb que lors de la recherche de films. Toutes les autres manipulations sont gérées via le local storage, ce qui évite la surcharge de l’API et améliore les performances générales de l’application.
+
+## Screenshots
+
+<img style="width: 600px" src="screenshots/view1.png"></img>
+<img style="width: 600px" src="screenshots/view2.png"></img>
+
+## Démo 
+Pour tester l'appli => <a href="https://mooviz-eight.vercel.app/" target="_blank">MooviZ</a>
 
 **Bonne découverte !**
 
