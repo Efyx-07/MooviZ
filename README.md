@@ -1,6 +1,8 @@
-<h1 style="color: orangered; text-align: center; font-size: 2.5rem; font-weight: 900" >MooviZ</h1>
-<h4 style="text-align: center; font-weight: 400">Application de Recherche et Gestion de Films avec Analyse Visuelle</h4>
-<h1 style="color: orangered; text-align: center;"">• • •</h1>
+# MooviZ
+
+#### Application de Recherche et Gestion de Films avec Analyse Visuelle
+
+# • • •
 
 ## Description
 Cette application web permet aux utilisateurs de rechercher des films via l'API publique OMDb, de filtrer les résultats, et de visualiser des classements dynamiques selon différents critères. Les utilisateurs peuvent définir leurs propres critères de classement (année de sortie, popularité, etc.) et afficher les résultats sous forme de graphiques interactifs.
@@ -32,6 +34,7 @@ L’application utilise l’API OMDb pour récupérer les informations sur les f
    NEXT_PUBLIC_OMDB_APIKEY=VotreCléApi
 3. Assurez-vous que votre fichier `.env` est ignoré par Git. Le fichier .gitignore  doit inclure .env pour éviter que la clé ne soit exposée publiquement.
 
+
 ## Installation
 
 1. Clonez le dépôt:
@@ -62,7 +65,8 @@ L’application utilise l’API OMDb pour récupérer les informations sur les f
 ## Tests
 
 Des tests unitaires ont été écrits pour assurer le bon fonctionnement des fonctionnalités critiques de l’application. Pour les exécuter, utilisez la commande suivante: 
-`npm run test`
+```plaintext
+npm run test
 
 ## À propos de l’API OMDb
 
@@ -70,13 +74,34 @@ L'API OMDb est une base de données de films en ligne qui fournit des informatio
 
 **À noter** : Dans sa forme actuelle, l’application ne sollicite l’API OMDb que lors de la recherche de films. Toutes les autres manipulations sont gérées via le local storage, ce qui évite la surcharge de l’API et améliore les performances générales de l’application.
 
+**Exemple de reponse:**
+
+Il existe plusieurs types de requêtes. Pour cette appli ont été utilisées:
+
+1. Requête **"Search"**. Permet de retourner une liste de films (jusque 10) ne contenant que les informations essentielles:
+
+"Search": [
+  {
+    "Title": "Oppenheimer",
+    "Year": "2023",
+    "imdbID": "tt15398776",
+    "Type": "movie",
+    "Poster": "chemin de l'affiche"
+  }, 
+  etc...
+]
+
+2. Requête par **Id**
+
+
+
 ## Screenshots
 
-<img style="width: 600px" src="screenshots/view1.png"></img>
-<img style="width: 600px" src="screenshots/view2.png"></img>
+![Screenshot 1](./screenshots/view1.png)
+![Screenshot 2](./screenshots/view2.png)
 
 ## Démo 
-Pour tester l'appli → <a href="https://mooviz-eight.vercel.app/" target="_blank" style="text-decoration: underline; font-weight: 700; color: orangered">MooviZ</a>
+Pour tester l'appli → <a href="https://mooviz-eight.vercel.app/">MooviZ</a>
 
 ////////////////////////////////////////////////////////////////////////////////
 
