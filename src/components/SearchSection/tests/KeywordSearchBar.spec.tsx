@@ -35,7 +35,7 @@ describe('KeywordSearchBar', () => {
     expect(iconElement).toBeInTheDocument();
   });
 
-  // Test le bon fonctionnement de la recherche par keyword
+  // Test du bon fonctionnement de la recherche par keyword
   it('should call getMoviesByKeywordWithGenres with the correct keyword when search icon is clicked', async () => {
     const keyword = 'keyword';
     (getMoviesByKeywordWithGenres as jest.Mock).mockResolvedValue([]);
