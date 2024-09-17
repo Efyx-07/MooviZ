@@ -8,6 +8,11 @@ global.fetch = jest.fn();
 // Test de FetchMoviesByKeyword
 // ===========================================================================================
 describe('FetchMoviesByKeyword', () => {
+  // Nettoie les mocks après chaque test
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   const mockResponse = {
     Search: [
       {
@@ -19,11 +24,6 @@ describe('FetchMoviesByKeyword', () => {
       },
     ],
   };
-
-  // Nettoie les mocks après chaque test
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
 
   //  Teste le scénario succés
   it('should fetch and return movies when API call is successful', async () => {
