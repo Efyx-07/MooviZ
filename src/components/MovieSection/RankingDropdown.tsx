@@ -15,7 +15,8 @@ export default function RankingDropdown() {
   return (
     <div>
       <Dropdown
-        id="type"
+        id="ranking-dropdown"
+        data-testid="ranking-dropdown"
         selectedValue=""
         onChange={handleRankChange}
         defaultLabel="-- Classer par"
