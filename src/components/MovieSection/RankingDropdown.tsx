@@ -1,6 +1,7 @@
 import './RankingDropdown.scss';
 import { Icon } from '@iconify/react';
 import useMovieStore from '@/stores/MovieStore';
+import Dropdown from '../Shared/Dropdown';
 
 export default function RankingDropdown() {
   const movieStore = useMovieStore();
@@ -14,21 +15,18 @@ export default function RankingDropdown() {
   };
 
   return (
-    <div className="dropdown-container">
-      <select
-        className="ranking-dropdown"
-        id="genre-dropdown"
+    <div>
+      <Dropdown
+        id="type"
+        selectedValue=""
         onChange={handleRankChange}
-      >
-        <option value="">-- Classer par</option>
-        <option value="popularityDesc">Plus populaires en 1er</option>
-        <option value="popularityAsc">Moins populaires en 1er</option>
-        <option value="yearDesc">Plus récents en 1er</option>
-        <option value="yearAsc">Plus anciens en 1er</option>
-      </select>
-      <Icon
-        icon="material-symbols-light:play-arrow"
-        className="dropdown-icon"
+        defaultLabel="-- Classer par"
+        options={[
+          { label: 'Plus populaires en 1er', value: 'popularityDesc' },
+          { label: 'Moins populaires en 1er', value: 'popularityAsc' },
+          { label: 'Plus récents en 1er', value: 'yearDesc' },
+          { label: 'Plus anciens en 1er', value: 'yearAsc' },
+        ]}
       />
     </div>
   );
