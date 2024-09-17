@@ -78,8 +78,7 @@ L'API OMDb est une base de données de films en ligne qui fournit des informatio
 Il existe plusieurs types de requêtes. Pour cette appli ont été utilisées:
 
 1. Requête **"Search"**. Permet de retourner une liste de films (jusque 10) ne contenant que les informations essentielles:
-<br>
-      ```json
+      ```
       "Search": [
          {
             "Title": "Oppenheimer",
@@ -92,9 +91,7 @@ Il existe plusieurs types de requêtes. Pour cette appli ont été utilisées:
       ]
 
 2. Requête par **Id**. Permet de retourner un film par son id avec tout le détail dont "Genre", crucial pour les filtrages : 
-<br>
-      ```json
-      
+      ```
          {
             "Title": "Oppenheimer",
             "Year": "2023",
