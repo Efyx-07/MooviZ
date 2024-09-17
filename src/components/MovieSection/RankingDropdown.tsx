@@ -1,5 +1,3 @@
-import './RankingDropdown.scss';
-import { Icon } from '@iconify/react';
 import useMovieStore from '@/stores/MovieStore';
 import Dropdown from '../Shared/Dropdown';
 
