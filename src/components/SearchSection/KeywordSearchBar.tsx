@@ -31,7 +31,11 @@ export default function KeywordSearchBar() {
         value={keyword}
         onChange={(e) => setKeyword(e.target.value)}
       />
-      <div className="searchIcon-container" onClick={handleSearchByKeyword}>
+      <div
+        className="searchIcon-container"
+        onClick={handleSearchByKeyword}
+        data-testid="search-icon"
+      >
         <Icon className="searchIcon" icon="material-symbols:search" />
       </div>
     </div>

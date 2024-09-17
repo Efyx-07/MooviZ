@@ -1,5 +1,6 @@
+import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import KeywordSearchBar from './KeywordSearchBar';
+import KeywordSearchBar from '../KeywordSearchBar';
 import { getMoviesByKeywordWithGenres } from '@/services/movie.service';
 import useMovieStore from '@/stores/MovieStore';
 
@@ -30,7 +31,7 @@ describe('KeywordSearchBar', () => {
     const inputElement = screen.getByPlaceholderText('Titre du film');
     expect(inputElement).toBeInTheDocument();
     // Vérifie la présence de l'icone de recherche
-    const iconElement = screen.getByRole('button');
+    const iconElement = screen.getByTestId('search-icon');
     expect(iconElement).toBeInTheDocument();
   });
 });
