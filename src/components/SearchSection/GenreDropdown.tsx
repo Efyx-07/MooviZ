@@ -48,6 +48,7 @@ export default function GenreDropdown() {
     <div className="dropdown-container">
       <Dropdown
         id="genre-dropdown"
+        data-testid="genre-dropdown"
         selectedValue={selectedGenre}
         onChange={handleGenreChange}
         defaultLabel="-- Genre"

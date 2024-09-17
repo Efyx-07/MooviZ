@@ -11,7 +11,7 @@ jest.mock('@/stores/MovieStore', () => ({
   })),
 }));
 
-const mockYears = [2024, 2023, 2022, 2021, 2020];
+const mockYears: string[] = ['2024', '2023', '2022', '2021', '2020'];
 
 jest.mock('../ReleaseYearDropdown', () => {
   return function MockedReleaseYearDropdown() {
@@ -57,7 +57,7 @@ describe('ReleaseYearDropdown', () => {
     fireEvent.change(dropdown, { target: { value: '2024' } });
     // Attend que la fonction soit appelée
     waitFor(() => {
-      expect(filterByYear).toHaveBeenCalledWith(2024);
+      expect(filterByYear).toHaveBeenCalledWith('2024');
     });
   });
 
