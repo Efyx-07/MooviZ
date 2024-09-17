@@ -78,24 +78,3 @@ export async function FetchMovieDetailsById(
     throw new Error('Error while fetching movie details: ' + error);
   }
 }
-
-// Récupère les genres des films affichés à partir de leurs imdbIDs
-// Retourne un tableau de strings
-// ===========================================================================================
-export async function getFilmsAvailableGenres(
-  movieIds: string[],
-): Promise<string[]> {
-  // Creation d'un set, stocke les differents genres sans doublons
-  const genreSet: Set<string> = new Set<string>();
-  // Récupére les détails de chaque films, extrait les genres, retourne un tableau de Promise
-  const movieDetailsPromises = movieIds.map((id) => FetchMovieDetailsById(id));
-  // Promises résolues, retourne un tableau avec les détails des films
-  const moviesDetails = await Promise.all(movieDetailsPromises);
-  // Extrait les genres des films, split la liste de genres, ajoute chaque genre au set.
-  moviesDetails.forEach((movie) => {
-    if (movie.Genre) {
-      movie.Genre.split(', ').forEach((genre) => genreSet.add(genre));
-    }
-  });
-  return Array.from(genreSet);
-}

@@ -32,7 +32,8 @@ export default function AnalysisMovieForm({ movies }: AnalysisMovieFormProps) {
   // !! Important, évite les appels API
   // ===========================================================================================
   function getAllSearchedMoviesGenres(movies: Movie[]) {
-    const genreSet: Set<string> = new Set<string>(); // Création d'un Set pour éviter les doublons de genres
+    // Création d'un Set pour éviter les doublons de genres
+    const genreSet: Set<string> = new Set<string>();
     // Parcourt les movies, retrouve tous les genres disponibles
     // split les genres (format par film: "Adventure, Drama, Thriller") et stocke chaque genre dans le set
     movies.forEach((movie) => {

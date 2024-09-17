@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Movie } from '@/interfaces/movie.interface';
 import useMovieStore from '@/stores/MovieStore';
-import { getFilmsAvailableGenres } from '@/services/movie.service';
 import Dropdown from '../Shared/Dropdown';
 
 export default function GenreDropdown() {
@@ -12,23 +11,28 @@ export default function GenreDropdown() {
   // Récupère les films stockés dans le store
   const movies: Movie[] = movieStore.initialMovies;
 
-  // Extrait les ids des films pour récupérer les genres
-  const movieIds: string[] = movies.map((movie) => movie.imdbID);
-
-  // Récupère les genres disponibles et les stocke dans le state
-  async function FetchGenres(ids: string[]) {
-    try {
-      const availableGenres = await getFilmsAvailableGenres(ids);
-      setGenres(availableGenres);
-    } catch (error) {
-      throw new Error('Error while fetching genres: ' + error);
-    }
+  // Récupère tous les genres des films stockés dans le store et met à jour setGenres dans le State
+  // !! Important, évite les appels API
+  // ===========================================================================================
+  function getInitialMoviesAllGenres(movies: Movie[]) {
+    // Création d'un Set pour éviter les doublons de genres
+    const genreSet: Set<string> = new Set<string>();
+    // Parcourt les movies, retrouve tous les genres disponibles
+    // split les genres (format par film: "Adventure, Drama, Thriller") et stocke chaque genre dans le set
+    movies.forEach((movie) => {
+      if (movie.Genre) {
+        movie.Genre.split(', ').forEach((genre) => genreSet.add(genre));
+      }
+    });
+    // Met à jour le state avec tous les genres
+    setGenres(Array.from(genreSet));
   }
 
   // Surveille les changements de movieIds et déclenche FetchGenres si des films son disponibles
+  // ===========================================================================================
   useEffect(() => {
-    if (movieIds.length > 0) FetchGenres(movieIds);
-  }, [movieIds]);
+    if (movies.length > 0) getInitialMoviesAllGenres(movies);
+  }, [movies]);
 
   // Mappe pour récupérer les options
   const options = genres.map((genre) => ({ label: genre, value: genre }));
