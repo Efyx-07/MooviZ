@@ -90,7 +90,7 @@ Il existe plusieurs types de requêtes. Pour cette appli ont été utilisées:
          etc...
       ]
 
-2. Requête par **Id**. Permet de retourner un film par son id avec tout le détail dont "Genre", crucial pour les filtrages : 
+2. Requête par **Id**. Permet de retourner un film par son id avec tout le détail dont "Genre" et "imdbRating", cruciaux pour les filtrages : 
       ```
          {
             "Title": "Oppenheimer",
@@ -104,7 +104,7 @@ Il existe plusieurs types de requêtes. Pour cette appli ont été utilisées:
             "Actors": "Cillian Murphy, Emily Blunt, Matt Damon",
             "Plot": "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
             "Language": "English, German, Italian",
-            "Country": "United States, United Kingdom",
+            "imdbRating": "8.3",
             etc...
          }
 
