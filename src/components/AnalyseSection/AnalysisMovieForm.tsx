@@ -76,7 +76,11 @@ export default function AnalysisMovieForm({ movies }: AnalysisMovieFormProps) {
   return (
     <div className="analysis-movie-form-container">
       <h3>Vos critères de recherche</h3>
-      <form className="analysis-movie-form" onSubmit={handleSubmit}>
+      <form
+        className="analysis-movie-form"
+        data-testid="analysis-movie-form"
+        onSubmit={handleSubmit}
+      >
         {/* Dropdown Type */}
         <div className="field-container">
           <label htmlFor="type">Type</label>
