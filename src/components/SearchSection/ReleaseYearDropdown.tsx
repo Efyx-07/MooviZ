@@ -32,6 +32,7 @@ export default function ReleaseYearDropdown() {
     <div className="dropdown-container">
       <Dropdown
         id="year-dropdown"
+        data-testid="year-dropdown"
         selectedValue={selectedYear}
         onChange={handleYearChange}
         defaultLabel="-- Année de sortie"

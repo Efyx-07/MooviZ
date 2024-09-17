@@ -11,7 +11,7 @@ jest.mock('@/stores/MovieStore', () => ({
   })),
 }));
 
-describe('NoteImdbDropdown Component', () => {
+describe('NoteImdbDropdown', () => {
   // Reset des mocks avant chaque test
   beforeEach(() => {
     jest.clearAllMocks();
