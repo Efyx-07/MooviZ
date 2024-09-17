@@ -65,45 +65,70 @@ L’application utilise l’API OMDb pour récupérer les informations sur les f
 ## Tests
 
 Des tests unitaires ont été écrits pour assurer le bon fonctionnement des fonctionnalités critiques de l’application. Pour les exécuter, utilisez la commande suivante: 
-```plaintext
-npm run test
+`npm run test`
 
 ## À propos de l’API OMDb
 
 L'API OMDb est une base de données de films en ligne qui fournit des informations détaillées sur les films (titre, année de sortie, acteurs, synopsis, etc.). L'application utilise cette API pour récupérer les données de films en temps réel. Chaque requête à l'API nécessite une clé API, qui est stockée dans un fichier .env pour des raisons de sécurité.
 
-**À noter** : Dans sa forme actuelle, l’application ne sollicite l’API OMDb que lors de la recherche de films. Toutes les autres manipulations sont gérées via le local storage, ce qui évite la surcharge de l’API et améliore les performances générales de l’application.
+**À noter** : Dans sa forme actuelle, **l’application ne sollicite l’API OMDb que lors de la recherche de films**. Toutes les autres manipulations sont gérées via le local storage combiné au state manager **Zustand**, ce qui évite la surcharge de l’API et améliore les performances générales de l’application.
 
 **Exemple de reponse:**
 
 Il existe plusieurs types de requêtes. Pour cette appli ont été utilisées:
 
 1. Requête **"Search"**. Permet de retourner une liste de films (jusque 10) ne contenant que les informations essentielles:
+<br>
+      ```json
+      "Search": [
+         {
+            "Title": "Oppenheimer",
+            "Year": "2023",
+            "imdbID": "tt15398776",
+            "Type": "movie",
+            "Poster": "chemin de l'affiche"
+         }, 
+         etc...
+      ]
 
-"Search": [
-  {
-    "Title": "Oppenheimer",
-    "Year": "2023",
-    "imdbID": "tt15398776",
-    "Type": "movie",
-    "Poster": "chemin de l'affiche"
-  }, 
-  etc...
-]
+2. Requête par **Id**. Permet de retourner un film par son id avec tout le détail dont "Genre", crucial pour les filtrages : 
+<br>
+      ```json
+      
+         {
+            "Title": "Oppenheimer",
+            "Year": "2023",
+            "Rated": "R",
+            "Released": "21 Jul 2023",
+            "Runtime": "180 min",
+            "Genre": "Biography, Drama, History",
+            "Director": "Christopher Nolan",
+            "Writer": "Christopher Nolan, Kai Bird, Martin Sherwin",
+            "Actors": "Cillian Murphy, Emily Blunt, Matt Damon",
+            "Plot": "The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.",
+            "Language": "English, German, Italian",
+            "Country": "United States, United Kingdom",
+            etc...
+         }
 
-2. Requête par **Id**
-
-
+Un interaction entre ces 2 formats API a été mis en place pour obtenir toute les données nécessaire au bon fonctionnement de l'application.
 
 ## Screenshots
 
+1. Interface:  Résultat de recherche en mode "Affiche" et résultat d'analyse en mode "Liste".
+
 ![Screenshot 1](./screenshots/view1.png)
+
+2. Interface:  Résultat de recherche et résultat d'analyse en mode "Graphique".
+
 ![Screenshot 2](./screenshots/view2.png)
 
 ## Démo 
-Pour tester l'appli → <a href="https://mooviz-eight.vercel.app/">MooviZ</a>
 
-////////////////////////////////////////////////////////////////////////////////
+Une démo entiérement utilisable est déployée sur Vercel. Suivez le lien pour la tester: 
+ →  <a href="https://mooviz-eight.vercel.app/">MooviZ</a>
+
+##
 
 **Bonne découverte !**
 
