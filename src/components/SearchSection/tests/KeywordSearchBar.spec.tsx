@@ -1,25 +1,29 @@
 import '@testing-library/jest-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import KeywordSearchBar from '../KeywordSearchBar';
 import { getMoviesByKeywordWithGenres } from '@/services/movie.service';
-import useMovieStore from '@/stores/MovieStore';
+import { Movie } from '@/interfaces/movie.interface';
 
 // Mock des dépendances
 jest.mock('@/services/movie.service', () => ({
   getMoviesByKeywordWithGenres: jest.fn(),
 }));
+
+const mockSetMoviesData = jest.fn();
+const mockAddMoviesToAllSearched = jest.fn();
+
 jest.mock('@/stores/MovieStore', () => ({
   __esModule: true,
-  default: () => ({
-    setMoviesData: jest.fn(),
-    addMoviesToAllSearched: jest.fn(),
-  }),
+  default: jest.fn(() => ({
+    setMoviesData: mockSetMoviesData,
+    addMoviesToAllSearched: mockAddMoviesToAllSearched,
+  })),
 }));
 
-describe('KeywordSearchBar', () => {
-  const setMovieData = jest.fn();
-  const addMoviesToAllSearched = jest.fn();
+// Mock de l'icône
+jest.mock('@iconify/react');
 
+describe('KeywordSearchBar', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -51,5 +55,64 @@ describe('KeywordSearchBar', () => {
 
     // Vérifie que la fonction a été appelée avec le mot-clé correct
     expect(getMoviesByKeywordWithGenres).toHaveBeenCalledWith(keyword);
+  });
+
+  // Test la mise à jour du store après une recherche réussie
+  it('should update the store with the search results', async () => {
+    const keyword: Movie['Title'] = 'keyword';
+    const mockMovies: Movie[] = [
+      {
+        Title: 'Title',
+        Year: '2000',
+        imdbID: 'imdbID',
+        Type: 'movie',
+        Poster: 'https://m.media-amazon.com/images/M/Poster.jpg',
+      },
+    ];
+
+    (getMoviesByKeywordWithGenres as jest.Mock).mockResolvedValue(mockMovies);
+
+    render(<KeywordSearchBar />);
+    const inputElement = screen.getByPlaceholderText('Titre du film');
+    const iconElement = screen.getByTestId('search-icon');
+
+    fireEvent.change(inputElement, { target: { value: keyword } });
+    fireEvent.click(iconElement);
+
+    await waitFor(() => {
+      expect(mockSetMoviesData).toHaveBeenCalledWith(mockMovies);
+      expect(mockAddMoviesToAllSearched).toHaveBeenCalledWith(mockMovies);
+    });
+  });
+
+  // Test la gestion des erreurs API
+  it('should handle errors from the API call', async () => {
+    const keyword: Movie['Title'] = 'keyword';
+    (getMoviesByKeywordWithGenres as jest.Mock).mockRejectedValue(
+      new Error('API Error'),
+    );
+
+    const consoleError = jest
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
+
+    render(<KeywordSearchBar />);
+
+    const inputElement = screen.getByPlaceholderText('Titre du film');
+    const iconElement = screen.getByTestId('search-icon');
+
+    fireEvent.change(inputElement, { target: { value: keyword } });
+    fireEvent.click(iconElement);
+
+    // Vérifie que console.error a été appelé
+    await waitFor(() => {
+      expect(consoleError).toHaveBeenCalledWith(
+        'Error fetching movies',
+        expect.any(Error),
+      );
+    });
+
+    // Nettoyage du mock
+    consoleError.mockRestore();
   });
 });
