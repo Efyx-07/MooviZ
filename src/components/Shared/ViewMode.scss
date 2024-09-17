@@ -1,0 +1,21 @@
+@import '../../styles/colors.scss';
+
+.viewMode-options {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  .view-mode-icon {
+    font-size: 1.25rem;
+    cursor: pointer;
+
+    &:hover,
+    &.active {
+      color: $accent;
+    }
+  }
+}

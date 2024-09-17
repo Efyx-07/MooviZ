@@ -1,5 +1,6 @@
 import './ResultsView.scss';
 import useMovieStore from '@/stores/MovieStore';
+import ViewMode from '../Shared/ViewMode';
 import SearchedCriteria from './SearchedCriteria';
 import MovieListView from './MovieListView';
 import GraphAnalysisView from './GraphAnalysisView';
@@ -20,21 +21,13 @@ export default function ResultsView() {
     <div className="results-view">
       <div className="results-view-head">
         <h3>Resultats</h3>
-
         {movies.length > 0 && (
-          <div className="viewMode-options">
-            <p>Affichage: </p>
-            <Icon
-              icon="cil:movie"
-              className={`view-mode-icon ${isMovieListView ? 'active' : ''}`}
-              onClick={() => toggleView('list')}
-            />
-            <Icon
-              icon="octicon:graph-16"
-              className={`view-mode-icon ${!isMovieListView ? 'active' : ''}`}
-              onClick={() => toggleView('graph')}
-            />
-          </div>
+          <ViewMode
+            isActive={isMovieListView}
+            toggleView={toggleView}
+            firstView="list"
+            secondView="graph"
+          />
         )}
       </div>
 
