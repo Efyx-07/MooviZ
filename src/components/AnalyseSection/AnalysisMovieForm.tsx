@@ -91,7 +91,7 @@ export default function AnalysisMovieForm({ movies }: AnalysisMovieFormProps) {
           />
         </div>
 
-        {/* Dropdown Type */}
+        {/* Dropdown Genre */}
         <div className="field-container">
           <label htmlFor="genre">Genre</label>
           <Dropdown
