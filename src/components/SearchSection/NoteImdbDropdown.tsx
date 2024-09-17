@@ -42,6 +42,7 @@ export default function NoteImdbDropdown() {
     <div className="dropdown-container">
       <Dropdown
         id="noteImdb-dropdown"
+        data-testid="noteImdb-dropdown"
         selectedValue={selectedNoteRange}
         onChange={handleNoteRangeChange}
         defaultLabel="-- Sélectionnez une plage de notes"

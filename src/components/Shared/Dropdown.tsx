@@ -14,6 +14,7 @@ interface DropdownProps {
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   defaultLabel: string;
   options: DropdownOption[];
+  'data-testid'?: string;
 }
 
 export default function Dropdown({
@@ -22,6 +23,7 @@ export default function Dropdown({
   onChange,
   defaultLabel,
   options,
+  'data-testid': dataTestId,
 }: DropdownProps) {
   return (
     <div className="dropdown-container">
@@ -30,6 +32,7 @@ export default function Dropdown({
         id={id}
         value={selectedValue}
         onChange={onChange}
+        data-testid={dataTestId}
       >
         <option value="">{defaultLabel}</option>
         {options.map((option) => (
