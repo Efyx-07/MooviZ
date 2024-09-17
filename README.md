@@ -77,6 +77,8 @@ L'API OMDb est une base de données de films en ligne qui fournit des informatio
 ## Démo 
 Pour tester l'appli => <a href="https://mooviz-eight.vercel.app/" target="_blank">MooviZ</a>
 
+////////////////////////////////////////////////////////////////////////////////
+
 **Bonne découverte !**
 
 FX.
