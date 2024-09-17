@@ -1,4 +1,4 @@
-import './MovieChart.scss';
+import './MoviesChart.scss';
 import { Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -10,6 +10,7 @@ import {
   Legend,
 } from 'chart.js';
 import useMovieStore from '@/stores/MovieStore';
+import { Movie } from '@/interfaces/movie.interface';
 
 // Enregistre les composants de Chart.js
 ChartJS.register(
@@ -21,19 +22,19 @@ ChartJS.register(
   Legend,
 );
 
-export default function MovieChart() {
-  // Récupère les films filtrés sur le store
-  const { filteredMovies } = useMovieStore();
+// Passe les props
+interface MoviesChartProps {
+  movies: Movie[];
+}
 
+export default function MoviesChart({ movies }: MoviesChartProps) {
   // Configure les données du graphique
   const data = {
-    labels: filteredMovies.map((movie) => movie.Title), // Label des barres
+    labels: movies.map((movie) => movie.Title), // Label des barres
     datasets: [
       {
         label: 'IMDb Rating', // Legende du graphique
-        data: filteredMovies.map((movie) =>
-          parseFloat(movie.imdbRating || '0'),
-        ), // note IMDb des filteredmovies
+        data: movies.map((movie) => parseFloat(movie.imdbRating || '0')), // note IMDb des filteredmovies
         backgroundColor: 'rgb(255, 69, 0)', // Couleur des barres
         borderColor: '#ff4500',
         borderWidth: 1,
@@ -65,7 +66,7 @@ export default function MovieChart() {
   };
 
   return (
-    <div className="movie-chart">
+    <div className="movies-chart">
       <Bar data={data} options={options} />
     </div>
   );

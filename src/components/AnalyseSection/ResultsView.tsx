@@ -44,7 +44,7 @@ export default function ResultsView() {
           {isMovieListView ? (
             <MovieListView movies={movies} />
           ) : (
-            <GraphAnalysisView />
+            <GraphAnalysisView movies={movies} />
           )}
         </div>
       )}

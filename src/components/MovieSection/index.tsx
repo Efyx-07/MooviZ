@@ -45,7 +45,11 @@ export default function MovieSection() {
             </div>
           </div>
           <RankingDropdown />
-          {isPosterView ? <PosterView movies={movies} /> : <GraphView />}
+          {isPosterView ? (
+            <PosterView movies={movies} />
+          ) : (
+            <GraphView movies={movies} />
+          )}
         </section>
       )}
     </>
