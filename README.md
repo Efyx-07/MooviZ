@@ -90,7 +90,7 @@ Il existe plusieurs types de requêtes. Pour cette appli ont été utilisées:
          etc...
       ]
 
-2. Requête par **Id**. Permet de retourner un film par son id avec tout le détail dont "Genre" et "imdbRating", cruciaux pour les filtrages : 
+2. Requête par **Id**. Permet de retourner un film par son id avec tout le détail dont "Genre" et "imdbRating", données cruciales pour les filtrages : 
       ```
          {
             "Title": "Oppenheimer",
@@ -108,7 +108,7 @@ Il existe plusieurs types de requêtes. Pour cette appli ont été utilisées:
             etc...
          }
 
-Un interaction entre ces 2 formats API a été mis en place pour obtenir toute les données nécessaire au bon fonctionnement de l'application.
+Un interaction entre ces 2 formats API a été mis en place pour obtenir toute les données nécessaires au bon fonctionnement de l'application.
 
 ## Screenshots
 
