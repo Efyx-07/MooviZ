@@ -19,7 +19,7 @@ export async function FetchMoviesByKeyword(keyword: string): Promise<Movie[]> {
   }
 }
 
-// Fetch les films par mot-clé, enrichit les films avec leurs genres et les retourne
+// Fetch les films par mot-clé, enrichit les films avec leurs genres et leurs notes et les retourne
 // ===========================================================================================
 export async function getMoviesByKeywordWithGenres(
   keyword: string,

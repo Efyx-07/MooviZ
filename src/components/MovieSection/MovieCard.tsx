@@ -13,10 +13,7 @@ export default function MovieCard({ movies }: MovieCardProps) {
     <>
       {movies.map((movie) => (
         <div className="movie-card" key={movie.imdbID}>
-          <div
-            className="poster-container"
-            onClick={() => router.push(`/movie/${movie.imdbID}`)}
-          >
+          <div className="poster-container">
             {/* Certaines affiches peuvent être manquantes ('N/A'), necessite un affichage conditionnel */}
             {movie.Poster !== 'N/A' ? (
               <Image
