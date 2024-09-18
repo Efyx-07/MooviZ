@@ -20,6 +20,7 @@ Cette application web permet aux utilisateurs de rechercher des films via l'API 
 - **Zustand** : Pour la gestion des états clients.
 - **Sass** : Pour le design personnalisé.
 - **Chart.js** : Bibliothèque pour les graphiques interactifs.
+- **Framer-motion** Bibilothèque d'animations.
 - **Iconify** : Bibliothèque d’icônes.
 - **Jest / Testing Library** : Pour les tests unitaires.
 
